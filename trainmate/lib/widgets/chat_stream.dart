@@ -9,7 +9,20 @@ class ChatStream extends StatefulWidget {
 
 class _ChatStreamState extends State<ChatStream> {
   final _chatController = TextEditingController();
-  final _messages = <Widget>[];
+  final _messages = <Widget>[
+    ChatMessage(
+      identity: 'adas',
+      name: 'Humorous Fox',
+      text: 'Does anyone know a good coffee place near Strathfield?',
+      date: DateTime.now().subtract(Duration(minutes: 5)),
+    ),
+    ChatMessage(
+      identity: '234435',
+      name: 'Fuzzy Hammer',
+      text: 'Have you tried the 7eleven? 😛',
+      date: DateTime.now().subtract(Duration(minutes: 3)),
+    ),
+  ];
 
   void _handleSubmit() {
     final user = User.of(context);
@@ -32,12 +45,13 @@ class _ChatStreamState extends State<ChatStream> {
   @override
   Widget build(BuildContext context) {
     return IconTheme(
-        data: IconThemeData(color: Colors.blue),
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
+      data: IconThemeData(color: Colors.blue),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
             Expanded(
               child: ListView.builder(
                 itemCount: _messages.length,
@@ -66,7 +80,9 @@ class _ChatStreamState extends State<ChatStream> {
                 ),
               ],
             ),
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

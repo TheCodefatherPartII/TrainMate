@@ -8,7 +8,7 @@ class ChatMessage extends StatelessWidget {
   final String text;
   final DateTime date;
 
-// constructor to get text from textfield
+  // constructor to get text from textfield
   ChatMessage({
     this.identity,
     this.name,
@@ -23,32 +23,37 @@ class ChatMessage extends StatelessWidget {
     final isMyMessage = user.id == identity;
 
     final avatar = Container(
-      margin: const EdgeInsets.only(right: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       child: CircleAvatar(
         child: SvgPicture.network(user.image),
       ),
     );
-    
-    final nameAndMessage = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(this.name, style: Theme.of(context).textTheme.subhead),
-        Container(
-          margin: const EdgeInsets.only(top: 5.0),
-          child: Text(text),
-        )
-      ],
+
+    final nameAndMessage = Expanded(
+      child: Column(
+        crossAxisAlignment: 
+            isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,        
+        children: <Widget>[
+          Text(this.name, style: Theme.of(context).textTheme.subhead),
+          Container(
+            margin: const EdgeInsets.only(top: 5.0),
+            child: Text(text),
+          )
+        ],
+      ),
     );
 
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
-          crossAxisAlignment:
-              isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-          children: <Widget>[
-            isMyMessage ? nameAndMessage : avatar,
-            isMyMessage ? avatar : nameAndMessage,
-          ],
-        ));
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment:
+            isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: <Widget>[
+          isMyMessage ? nameAndMessage : avatar,
+          isMyMessage ? avatar : nameAndMessage,
+        ],
+      ),
+    );
   }
 }
