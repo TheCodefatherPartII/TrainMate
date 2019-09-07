@@ -24,11 +24,15 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
   }
 
   void getTripDetails() async {
-    this.trip = await getTrip(this.widget.carriageId);
+    final res = await getTrip(widget.carriageId);
 
     setState(() {
       loading = false;
+      trip = res;
     });
+
+    Navigator.of(context)
+        .pushNamed('/chat', arguments: {'title': res?.routeName, 'trip': res});
   }
 
 //  _goToChatPage() async {
