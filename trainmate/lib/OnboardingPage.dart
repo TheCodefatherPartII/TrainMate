@@ -21,8 +21,11 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   bool _gotCarriageNumber = false;
+  String carId;
 
-  _goToChatPage() {
+  final controller = TextEditingController();
+
+  _goToChatPage() async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ChatPage()),
@@ -73,7 +76,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 padding: EdgeInsets.all(20.0),
                 child: const TextField(
                   style: TextStyle(fontSize: 20),
-                  decoration: InputDecoration(hintText: "Enter carrigae"),
+                  decoration: InputDecoration(hintText: "Enter carriage"),
                 ),
               ),
               ButtonTheme(
