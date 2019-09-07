@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             case '/chat':
               return MaterialPageRoute(
                 settings: settings,
-                builder: (c) => ChatPage(title: args["title"]),
+                builder: (c) => ChatPage(title: args["title"], trip: args["trip"]),
               );
             case '/pick-destination':
               return MaterialPageRoute(

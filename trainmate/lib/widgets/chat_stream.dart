@@ -32,12 +32,13 @@ class _ChatStreamState extends State<ChatStream> {
   @override
   Widget build(BuildContext context) {
     return IconTheme(
-        data: IconThemeData(color: Colors.blue),
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
+      data: IconThemeData(color: Colors.blue),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
             Expanded(
               child: ListView.builder(
                 itemCount: _messages.length,
@@ -66,7 +67,9 @@ class _ChatStreamState extends State<ChatStream> {
                 ),
               ],
             ),
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -12,6 +12,7 @@ class PickDestinationPage extends StatefulWidget {
   @override
   _PickDestinationPageState createState() => _PickDestinationPageState();
 }
+
 class _PickDestinationPageState extends State<PickDestinationPage> {
   TripDetails trip;
 
@@ -25,52 +26,45 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
   }
 
   void getTripDetails() async {
-    this.trip = await getTrip(this.widget.carriageId);
+    final res = await getTrip(widget.carriageId);
 
     setState(() {
       loading = false;
+      trip = res;
     });
-  }
 
-//  _goToChatPage() async {
-//    final trip = await getTrip(_carriageController.text?.trim());
-//
-//    Navigator.push(
-//      context,
-//      MaterialPageRoute(
-//          builder: (context) => ChatPage(title: trip?.routeDescription)),
-//    );
-//  }
+    Navigator.of(context)
+        .pushNamed('/chat', arguments: {'title': res?.routeName, 'trip': res});
+  }
 
   @override
   Widget build(BuildContext context) {
     if (loading) {
       return Scaffold(
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text("Loading", style: TextStyle(fontSize: 12)),
-                ),
-              ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text("Loading", style: TextStyle(fontSize: 12)),
             ),
-          ));
+          ],
+        ),
+      ));
     }
-
 
     return Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text("Need Help?", style: TextStyle(fontSize: 12)),
-              ),
-            ],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Text("Need Help?", style: TextStyle(fontSize: 12)),
           ),
-        ));
+        ],
+      ),
+    ));
   }
 }

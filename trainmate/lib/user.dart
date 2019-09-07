@@ -4,13 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 const firstPart = [
-  "Boiling",
   "Fluffy",
-  "Sharp",
-  "Breezy",
   "Freezing",
-  "Silky",
-  "Bumpy",
   "Fuzzy",
   "Slick",
   "Chilly",
@@ -22,8 +17,6 @@ const firstPart = [
   "Cuddly",
   "Icy",
   "Soft",
-  "Solid",
-  "Dirty",
   "Melted",
   "Sticky",
   "Dry",
@@ -31,10 +24,6 @@ const firstPart = [
   "Tender",
   "Dusty",
   "Prickly",
-  "Encrusted",
-  "Rough",
-  "Uneven",
-  "Filthy",
   "Shaggy",
   "Warm",
   "Flaky",
@@ -42,24 +31,57 @@ const firstPart = [
 ];
 
 const secondPart = [
-  // Large cats
-  "Panther", "Wildcat", "Tiger", "Lion", "Cheetah", "Cougar", "Leopard",
-  // Snakes
-  "Viper", "Cottonmouth", "Python", "Boa", "Sidewinder", "Cobra",
-  // Other predators
-  "Grizzly", "Jackal", "Falcon",
-  // Prey
-  "Wildebeest", "Gazelle", "Zebra", "Elk", "Moose", "Deer", "Stag", "Pony",
-  "Koala", "Sloth",
-  // Mythical creatures
-  "Mermaid", "Unicorn", "Fairy", "Troll", "Yeti", "Pegasus", "Griffin",
+  "Panther",
+  "Wildcat",
+  "Tiger",
+  "Lion",
+  "Cheetah",
+  "Cougar",
+  "Leopard",
+  "Viper",
+  "Cottonmouth",
+  "Python",
+  "Boa",
+  "Sidewinder",
+  "Cobra",
+  "Grizzly",
+  "Jackal",
+  "Falcon",
+  "Wildebeest",
+  "Gazelle",
+  "Zebra",
+  "Elk",
+  "Moose",
+  "Deer",
+  "Stag",
+  "Pony",
+  "Koala",
+  "Sloth",
+  "Mermaid",
+  "Unicorn",
+  "Fairy",
+  "Troll",
+  "Yeti",
+  "Pegasus",
+  "Griffin",
   "Dragon",
-  // Occupations
-  "Nomad", "Wizard", "Cleric", "Pilot", "Captain", "Commander", "General",
-  "Major", "Admiral", "Chef",
-  // Sea life
-  "Octopus", "Lobster", "Crab", "Barnacle", "Hammerhead", "Orca", "Piranha",
-  // Musical
+  "Nomad",
+  "Wizard",
+  "Cleric",
+  "Pilot",
+  "Captain",
+  "Commander",
+  "General",
+  "Major",
+  "Admiral",
+  "Chef",
+  "Octopus",
+  "Lobster",
+  "Crab",
+  "Barnacle",
+  "Hammerhead",
+  "Orca",
+  "Piranha",
   "Piano",
   "Keyboard",
   "Guitar",
@@ -78,8 +100,13 @@ const secondPart = [
   "Drum",
   "Organ",
   "Banjo",
-  // Tools
-  "Mask", "Hammer", "Drill", "Compressor", "Wrench", "Mixer", "Router",
+  "Mask",
+  "Hammer",
+  "Drill",
+  "Compressor",
+  "Wrench",
+  "Mixer",
+  "Router",
   "Vacuum",
 ];
 
@@ -101,10 +128,10 @@ Color pickColour() {
 class User extends Model {
   User(this.id) {
     this.name = pickName();
-    this.image = "https://avatars.dicebear.com/v2/human/${this.id}";
+    this.image = "https://avatars.dicebear.com/v2/human/${this.id}.svg";
     this.colour = pickColour();
   }
-  
+
   final String id;
   String name;
   String image;
