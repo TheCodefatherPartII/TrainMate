@@ -91,8 +91,8 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 48.0,
-                    height: 48.0,
+                    width: 20.0,
+                    height: 20.0,
                     decoration: new BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
