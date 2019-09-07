@@ -61,7 +61,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             // Column has various properties to control how it sizes itself and
             // how it positions its children. Here we use mainAxisAlignment to
             // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
+            // a  xis because Columns are vertical (the cross axis would be
             // horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -70,8 +70,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 padding: EdgeInsets.all(20.0),
                 child: TextField(
                   controller: _carriageController,
-                  style: TextStyle(fontSize: 20),
                   decoration: InputDecoration(hintText: "Enter carriage no"),
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
               ButtonTheme(
