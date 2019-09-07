@@ -26,25 +26,36 @@ class TrainOccupancyWidget extends StatelessWidget {
                     ),
                   ),
                   child: Container(
-                    color: getOccupancyColor(margin),
-                    margin: EdgeInsets.only(
-                        top: margin),
+                    color: getOccupancyColor(carriageOccupancy[index]),
+                    margin: EdgeInsets.only(top: margin),
                     width: 30.0,
                   ));
             }));
   }
 
-  Color getOccupancyColor(double margin) {
-    if (margin < 5) {
-      return Colors.red;
-    } else if (margin > 5 && margin < 20.0) {
-      return Colors.orange;
-    } else {
-      return Colors.green;
+  Color getOccupancyColor(int occupancy) {
+    switch (occupancy) {
+      case 5:
+        return Colors.red;
+      case 4:
+        return Colors.deepOrangeAccent;
+      case 3:
+        return Colors.orangeAccent;
+      case 2:
+        return Colors.lightGreen;
+      default:
+        return Colors.green.shade700;
     }
   }
 
   double topMargin(int occupancy) {
-    return 30.0 - (((occupancy/5) * 100)/100) * 30;
+    switch (occupancy) {
+      case 1:
+        return 15.0;
+      case 2: return 12.0;
+      case 3: return 8.0;
+      case 4: return 4.0;
+      default: return 0.0;
+    }
   }
 }

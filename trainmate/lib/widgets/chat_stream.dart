@@ -9,7 +9,20 @@ class ChatStream extends StatefulWidget {
 
 class _ChatStreamState extends State<ChatStream> {
   final _chatController = TextEditingController();
-  final _messages = <Widget>[];
+  final _messages = <Widget>[
+    ChatMessage(
+      identity: 'adas',
+      name: 'Humorous Fox',
+      text: 'Does anyone know a good coffee place near Strathfield?',
+      date: DateTime.now().subtract(Duration(minutes: 5)),
+    ),
+    ChatMessage(
+      identity: '234435',
+      name: 'Fuzzy Hammer',
+      text: 'Have you tried the 7eleven? 😛',
+      date: DateTime.now().subtract(Duration(minutes: 3)),
+    ),
+  ];
 
   void _handleSubmit() {
     final user = User.of(context);
