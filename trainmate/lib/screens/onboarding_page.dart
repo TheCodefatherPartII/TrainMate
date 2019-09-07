@@ -39,6 +39,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final controller = TextEditingController();
 
   _goToChatPage() async {
+    FocusScope.of(context).unfocus();
+
     Navigator.of(context).pushNamed(
       '/pick-destination',
       arguments: {'carriageId': carriageId},

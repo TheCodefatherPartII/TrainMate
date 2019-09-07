@@ -10,7 +10,7 @@ RouteStop _$RouteStopFromJson(Map<String, dynamic> json) {
   return RouteStop(
       id: json['id'] as String,
       name: json['name'] as String,
-      arrivalTime: json['arrivalTime'] as int,
+      arrivalTime: DateTime.fromMicrosecondsSinceEpoch(json['arrivalTime'] as int),
       delay: json['delay'] as int);
 }
 

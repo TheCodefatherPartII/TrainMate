@@ -29,6 +29,7 @@ dependencies:
   uuid: '^2.0.1'
   scoped_model: ^1.0.0
   code_input: ^1.0.3
+  shimmer: ^1.0.0
 
 dev_dependencies:
   build_runner: ^1.0.0
