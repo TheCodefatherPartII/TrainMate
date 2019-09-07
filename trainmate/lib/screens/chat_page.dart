@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trainmate/screens/chat_message.dart';
+import 'package:trainmate/screens/train_occupancy.dart';
 
 class ChatPage extends StatelessWidget {
 
@@ -76,6 +77,7 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return new Column(
       children: <Widget>[
+        TrainOccupancyWidget(),
         new Flexible(
           child: ListView.builder(
             padding: new EdgeInsets.all(8.0),
