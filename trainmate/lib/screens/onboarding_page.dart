@@ -2,9 +2,6 @@ import 'package:code_input/code_input.dart';
 
 import 'package:flutter/material.dart';
 import 'package:trainmate/api.dart';
-import 'package:trainmate/screens/chat_page.dart';
-import 'package:trainmate/screens/pick_destination.dart';
-import 'package:trainmate/screens/train_occupancy.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -25,7 +22,7 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  int carriageId;
+  String carriageId;
 
   final CodeInputBuilder codeInputBuilder = CodeInputBuilders.containerized(
     emptySize: new Size(45, 60),
@@ -42,11 +39,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final controller = TextEditingController();
 
   _goToChatPage() async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => PickDestinationPage(carriageId: carriageId),
-    ));
+    Navigator.of(context).pushNamed(
+      '/pick-destination',
+      arguments: {'carriageId': carriageId},
+    );
   }
 
   @override
@@ -92,7 +88,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   length: 4,
                   keyboardType: TextInputType.number,
                   builder: codeInputBuilder,
-                  onFilled: (value) => carriageId = int.parse(value.trim()),
+                  onFilled: (value) {
+                    setState(() {
+                     carriageId = value.trim(); 
+                    });
+                  },
                 )
               ),
               ButtonTheme(

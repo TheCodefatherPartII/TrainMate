@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:trainmate/models/route_stop.dart';
 
 import './models/models.dart';
 
-Future<TripDetails> getTrip(int carriageId) async {
-  sleep(Duration(seconds: 2));
+Future<TripDetails> getTrip(String carriageId) async {
+  // sleep(Duration(seconds: 2));
 
   final res = await http.get('https://zw19q95ckk.execute-api.ap-southeast-2.amazonaws.com/prod/');
 
@@ -31,18 +30,22 @@ Future<TripDetails> getTrip(int carriageId) async {
     RouteStop(
       id: 'asd3',
       name: 'Redfern Station',
+      arrivalTime: 1567979190,
     ),
     RouteStop(
       id: 'asd4',
       name: 'Central Station',
+      arrivalTime: 1567979190,
     ),
     RouteStop(
       id: 'asd5',
       name: 'Town Hall Station',
+      arrivalTime: 1567979190,
     ),
     RouteStop(
       id: 'asd6',
       name: 'Wynyard Station',
+      arrivalTime: 1567979190,
     ),
   ];
 

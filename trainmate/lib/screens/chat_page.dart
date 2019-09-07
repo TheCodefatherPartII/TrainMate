@@ -1,98 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:trainmate/screens/chat_message.dart';
 import 'package:trainmate/screens/train_occupancy.dart';
+import 'package:trainmate/widgets/chat_stream.dart';
 
 class ChatPage extends StatelessWidget {
-
   ChatPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text(this.title),
-        ),
-        body: new ChatScreen()
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(this.title),
+      ),
+      body: ChatScreen(),
     );
   }
 }
 
 class ChatScreen extends StatefulWidget {
   @override
-  State createState() => new ChatScreenState();
+  State createState() => ChatScreenState();
 }
 
 class ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _chatController = new TextEditingController();
-  final List<ChatMessage> _messages = <ChatMessage>[];
-
-  final String identity = "anonymouse-id-from-firebase";
-
-  void _handleSubmit(String text) {
-    _chatController.clear();
-
-    ChatMessage message = new ChatMessage(
-        identity: identity,
-        text: text
-    );
-
-    setState(() {
-      _messages.insert(0, message);
-    });
-  }
-
-  Widget _chatEnvironment (){
-    return IconTheme(
-      data: new IconThemeData(color: Colors.blue),
-      child: new Container(
-        margin: const EdgeInsets.symmetric(horizontal:8.0),
-        child: new Row(
-          children: <Widget>[
-            new Flexible(
-              child: new TextField(
-                decoration: new InputDecoration.collapsed(hintText: "Start typing ..."),
-                controller: _chatController,
-                onSubmitted: _handleSubmit,
-              ),
-            ),
-            new Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: new IconButton(
-                icon: new Icon(Icons.send),
-
-                onPressed: ()=> _handleSubmit(_chatController.text),
-
-              ),
-            )
-          ],
-        ),
-
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return new Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         TrainOccupancyWidget(),
-        new Flexible(
-          child: ListView.builder(
-            padding: new EdgeInsets.all(8.0),
-            reverse: true,
-            itemBuilder: (_, int index) => _messages[index],
-            itemCount: _messages.length,
-          ),
-        ),
-        new Divider(
+        Divider(
           height: 1.0,
         ),
-        new Container(decoration: new BoxDecoration(
-          color: Theme.of(context).cardColor,
+        Expanded(
+          child: ChatStream(),
         ),
-          child: _chatEnvironment(),)
       ],
     );
   }

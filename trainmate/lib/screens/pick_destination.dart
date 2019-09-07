@@ -5,14 +5,13 @@ import 'package:trainmate/api.dart';
 import 'package:trainmate/models/models.dart';
 
 class PickDestinationPage extends StatefulWidget {
-  final int carriageId;
+  final String carriageId;
 
   PickDestinationPage({Key key, this.carriageId}) : super(key: key);
 
   @override
   _PickDestinationPageState createState() => _PickDestinationPageState();
 }
-
 class _PickDestinationPageState extends State<PickDestinationPage> {
   TripDetails trip;
 
