@@ -46,7 +46,7 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
     }
 
     final Widget svg =
-        SvgPicture.asset('images/train_logo.svg', width: 20, height: 20);
+        SvgPicture.asset('images/train_logo.svg', width: 30, height: 30);
 
     return Scaffold(
       appBar: AppBar(
@@ -94,34 +94,31 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
           child: Column(
             children: [0, 1, 2, 3, 4, 5, 6]
                 .map((_) => Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: 24.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            width: 20.0,
-                            height: 20.0,
+                            width: 30.0,
+                            height: 30.0,
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                                color: Colors.white, shape: BoxShape.circle),
+                            margin: EdgeInsets.only(right: 24),
                           ),
                           Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  height: 8.0,
-                                  color: Colors.white,
-                                ),
-                              ],
+                            child: Container(
+                              height: 12.0,
+                              color: Colors.white,
+                              margin: EdgeInsets.only(top: 8),
                             ),
-                          )
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 12.0,
+                              color: Colors.white,
+                              margin: EdgeInsets.only(top: 8, left: 64),
+                            ),
+                          ),
                         ],
                       ),
                     ))

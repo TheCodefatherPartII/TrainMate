@@ -100,9 +100,9 @@ String pickName() {
 
 Color pickColour() {
   return Color.fromRGBO(
-    Random().nextInt(255),
-    Random().nextInt(255),
-    Random().nextInt(255),
+    50 + Random().nextInt(180),
+    50 + Random().nextInt(180),
+    50 + Random().nextInt(180),
     1,
   );
 }
