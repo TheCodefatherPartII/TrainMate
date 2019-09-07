@@ -11,7 +11,7 @@ class Timeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    int timeDiff = DateTime.fromMillisecondsSinceEpoch(stops.last.stop.arrivalTime).difference(DateTime.now()).inMinutes;
+    int timeDiff = stops.last.stop.arrivalTime.difference(DateTime.now()).inMinutes;
     String timeDisplay = timeDiff < 0 ? "Missed your stop? Get off now!" : timeDiff < 3 ? "Arriving now, move towards the carrige door." : "Arriving in $timeDiff m.";
 
     return  Row(

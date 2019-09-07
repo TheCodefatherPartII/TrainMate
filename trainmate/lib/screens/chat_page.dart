@@ -34,7 +34,7 @@ class ChatScreenState extends State<ChatScreen> {
       stop: new RouteStop(
           id: "dummy-id",
           name: "Burwood",
-          arrivalTime: 1567849776 * 1000,
+          arrivalTime: DateTime.now(),
           delay: 0
       ),
       isCurrent: true,
@@ -43,7 +43,7 @@ class ChatScreenState extends State<ChatScreen> {
       stop: new RouteStop(
           id: "dummy-id",
           name: "Wynyard",
-          arrivalTime: 1567849776 * 1000,
+          arrivalTime: DateTime.now().add(new Duration(minutes: 18)),
           delay: 0
       ),
       isCurrent: false,
