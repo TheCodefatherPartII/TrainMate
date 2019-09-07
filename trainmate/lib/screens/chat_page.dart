@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:trainmate/screens/train_occupancy.dart';
+import 'package:trainmate/widgets/chat_stream.dart';
+import 'package:trainmate/models/route_stop.dart';
 
 import 'timeline.dart';
-import 'station.dart';
+import 'stop.dart';
 
 class ChatPage extends StatelessWidget {
   ChatPage({Key key, this.title}) : super(key: key);
@@ -26,6 +28,27 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> {
+
+  final List<Stop> dummyStationList = [
+    new Stop(
+      stop: new RouteStop(
+          id: "dummy-id",
+          name: "Burwood",
+          arrivalTime: 1567849776 * 1000,
+          delay: 0
+      ),
+      isCurrent: true,
+    ),
+    new Stop(
+      stop: new RouteStop(
+          id: "dummy-id",
+          name: "Wynyard",
+          arrivalTime: 1567849776 * 1000,
+          delay: 0
+      ),
+      isCurrent: false,
+    ),
+  ];
 
   Widget _renderTimeline() => Container(
       margin: EdgeInsets.only(top: 10, bottom: 10),
