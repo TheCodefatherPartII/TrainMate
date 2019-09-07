@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:trainmate/models/route_stop.dart';
 import 'package:trainmate/screens/chat_message.dart';
 import 'package:trainmate/screens/train_occupancy.dart';
+
+import 'timeline.dart';
+import 'station.dart';
 
 class ChatPage extends StatelessWidget {
 
@@ -29,6 +33,26 @@ class ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = <ChatMessage>[];
 
   final String identity = "anonymouse-id-from-firebase";
+  final List<Stop> dummyStationList = [
+    new Stop(
+      stop: new RouteStop(
+          id: "dummy-id",
+          name: "Burwood",
+          arrivalTime: 1567849776,
+          delay: 0
+      ),
+      isCurrent: true,
+    ),
+    new Stop(
+      stop: new RouteStop(
+          id: "dummy-id",
+          name: "Wynyard",
+          arrivalTime: 1567899776,
+          delay: 0
+      ),
+      isCurrent: false,
+    ),
+  ];
 
   void _handleSubmit(String text) {
     _chatController.clear();
@@ -73,11 +97,17 @@ class ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  Widget _renderTimeline() => Container(
+    margin: EdgeInsets.only(top: 10, bottom: 10),
+    child: Timeline(stops: dummyStationList,)
+  );
+
   @override
   Widget build(BuildContext context) {
     return new Column(
       children: <Widget>[
         TrainOccupancyWidget(),
+        _renderTimeline(),
         new Flexible(
           child: ListView.builder(
             padding: new EdgeInsets.all(8.0),
@@ -92,7 +122,8 @@ class ChatScreenState extends State<ChatScreen> {
         new Container(decoration: new BoxDecoration(
           color: Theme.of(context).cardColor,
         ),
-          child: _chatEnvironment(),)
+          child: _chatEnvironment(),
+        ),
       ],
     );
   }
