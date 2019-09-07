@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trainmate/ChatPage.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -20,6 +21,13 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   bool _gotCarriageNumber = false;
+
+  _goToChatPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ChatPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +80,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   minWidth: 100.0,
                   child: RaisedButton(
                     padding: EdgeInsets.all(10.0),
-                    onPressed: () {},
+                    onPressed: _goToChatPage,
                     color: Color.fromRGBO(0, 188, 212, 1.0),
                     child: const Text('GO',
                         style: TextStyle(fontSize: 20, color: Colors.white)),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'OnboardingPage.dart';
+import 'ChatPage.dart';
 
 void main() => runApp(MyApp());
 
