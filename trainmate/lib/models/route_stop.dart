@@ -13,7 +13,7 @@ class RouteStop {
 
   String id;
   String name;
-  int arrivalTime;
+  DateTime arrivalTime;
   int delay;
 
   factory RouteStop.fromJson(Map<String, dynamic> json) => _$RouteStopFromJson(json);

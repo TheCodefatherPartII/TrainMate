@@ -1,13 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 import 'package:trainmate/models/route_stop.dart';
 
 import './models/models.dart';
 
+final _random = new Random();
+int next(int min, int max) => min + _random.nextInt(max - min);
+
 Future<TripDetails> getTrip(String carriageId) async {
-  // sleep(Duration(seconds: 2));
+  sleep(Duration(seconds: 7));
 
   final res = await http.get('https://zw19q95ckk.execute-api.ap-southeast-2.amazonaws.com/prod/');
 
@@ -16,40 +20,43 @@ Future<TripDetails> getTrip(String carriageId) async {
   // final myTrip = allTrips.firstWhere((TripDetails t) => t.carriageIds.contains(carId ?? 'dne'), orElse: () => null);
   final myTrip = allTrips.isNotEmpty ? allTrips.first : TripDetails();
 
+  final now = DateTime.now();
+  DateTime nextTime() => now.add(new Duration(minutes: next(0, 90)));
+
   myTrip.stops = [
     RouteStop(
       id: 'asd1',
       name: 'Parramatta Station',
-      arrivalTime: 1567979190,
+      arrivalTime: nextTime(),
     ),
     RouteStop(
       id: 'asd2',
       name: 'Strathfield Station',
-      arrivalTime: 1567979190,
+      arrivalTime: nextTime(),
     ),
     RouteStop(
       id: 'asd3',
       name: 'Redfern Station',
-      arrivalTime: 1567979190,
+      arrivalTime: nextTime(),
     ),
     RouteStop(
       id: 'asd4',
       name: 'Central Station',
-      arrivalTime: 1567979190,
+      arrivalTime: nextTime(),
     ),
     RouteStop(
       id: 'asd5',
       name: 'Town Hall Station',
-      arrivalTime: 1567979190,
+      arrivalTime: nextTime(),
     ),
     RouteStop(
       id: 'asd6',
       name: 'Wynyard Station',
-      arrivalTime: 1567979190,
+      arrivalTime: nextTime(),
     ),
   ];
 
-  // debugPrint(myTrip.toJson().toString(), wrapWidth: 255);
+  myTrip.stops.sort((s1, s2) => s1.arrivalTime.compareTo(s2.arrivalTime));
 
   return myTrip;
 }
