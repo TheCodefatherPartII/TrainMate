@@ -1,7 +1,7 @@
+import 'package:code_input/code_input.dart';
+
 import 'package:flutter/material.dart';
 import 'package:trainmate/api.dart';
-import 'package:trainmate/screens/chat_page.dart';
-import 'package:trainmate/screens/train_occupancy.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -22,17 +22,26 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  TextEditingController _carriageController = new TextEditingController();
+  String carriageId;
+
+  final CodeInputBuilder codeInputBuilder = CodeInputBuilders.containerized(
+    emptySize: new Size(45, 60),
+    filledSize: new Size(60, 60),
+    totalSize: new Size(60, 60),
+
+    emptyDecoration: new BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
+    filledDecoration: null,
+
+    emptyTextStyle: null,
+    filledTextStyle: new TextStyle(color: Colors.black87, fontSize: 35.0)
+  );
 
   final controller = TextEditingController();
 
   _goToChatPage() async {
-    final trip = await getTrip(_carriageController.text?.trim());
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ChatPage(title: trip?.routeDescription)),
+    Navigator.of(context).pushNamed(
+      '/pick-destination',
+      arguments: {'carriageId': carriageId},
     );
   }
 
@@ -45,11 +54,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
         body: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
@@ -70,22 +74,36 @@ class _OnboardingPageState extends State<OnboardingPage> {
             // horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Hello", style: TextStyle(fontSize: 28)),
-              Padding(
-                padding: EdgeInsets.all(20.0),
-                child: TextField(
-                  controller: _carriageController,
-                  decoration: InputDecoration(hintText: "Enter carriage no"),
-                  keyboardType: TextInputType.number,
-                  style: TextStyle(fontSize: 20),
+              new Container(
+                child: new Image.asset(
+                  'images/logo.png',
+                  height: 60.0,
+                  fit: BoxFit.cover,
                 ),
               ),
+              new Text("Hello", style: TextStyle(fontSize: 28)),
+              new Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+                child: CodeInput(
+                  length: 4,
+                  keyboardType: TextInputType.number,
+                  builder: codeInputBuilder,
+                  onFilled: (value) {
+                    setState(() {
+                     carriageId = value.trim(); 
+                    });
+                  },
+                )
+              ),
               ButtonTheme(
-                  minWidth: 100.0,
+                  minWidth: 150.0,
                   child: RaisedButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: _goToChatPage,
-                    color: Color.fromRGBO(0, 188, 212, 1.0),
+                    color: Colors.deepOrange,
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     child: const Text('GO',
                         style: TextStyle(fontSize: 20, color: Colors.white)),
                   )),
