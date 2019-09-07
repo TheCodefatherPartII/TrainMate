@@ -8,9 +8,10 @@ import './timeline.dart';
 import './stop.dart';
 
 class ChatPage extends StatelessWidget {
-  ChatPage({Key key, this.title, this.trip}) : super(key: key);
+  ChatPage({Key key, this.title, this.trip, this.destination}) : super(key: key);
 
   final String title;
+  final RouteStop destination;
   final TripDetails trip;
 
   @override
@@ -19,40 +20,22 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(this.title),
       ),
-      body: ChatScreen(trip: trip),
+      body: ChatScreen(trip: trip, destination: destination),
     );
   }
 }
 
 class ChatScreen extends StatelessWidget {
-  ChatScreen({this.trip});
+  ChatScreen({this.trip, this.destination});
   final TripDetails trip;
-
-  
-  final List<Stop> dummyStationList = [
-    new Stop(
-      stop: new RouteStop(
-          id: "dummy-id",
-          name: "Burwood",
-          arrivalTime: DateTime.now(),
-          delay: 0
-      ),
-      isCurrent: true,
-    ),
-    new Stop(
-      stop: new RouteStop(
-          id: "dummy-id2",
-          name: "Wynyard",
-          arrivalTime: DateTime.now().add(new Duration(minutes: 18)),
-          delay: 0
-      ),
-      isCurrent: false,
-    ),
-  ];
+  final RouteStop destination;
 
   Widget _renderTimeline() => Container(
       margin: EdgeInsets.only(top: 10, bottom: 10),
-      child: Timeline(stops: dummyStationList,)
+      child: Timeline(stops: [
+        Stop(stop: trip.stops.first, isCurrent: true),
+        Stop(stop: destination, isCurrent: false),
+      ]),
   );
 
   @override
@@ -61,8 +44,8 @@ class ChatScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        TrainOccupancyWidget(carriageOccupancy: trip?.occupancy ?? <int>[]),
         _renderTimeline(),
+        TrainOccupancyWidget(carriageOccupancy: trip?.occupancy ?? <int>[]),
         Divider(height: 1.0),
         Expanded(
           child: ChatStream(),

@@ -5,6 +5,8 @@ import 'package:trainmate/user.dart';
 class ChatMessage extends StatelessWidget {
   final String identity;
   final String name;
+  final String image;
+  final Color colour;
   final String text;
   final DateTime date;
 
@@ -12,6 +14,8 @@ class ChatMessage extends StatelessWidget {
   ChatMessage({
     this.identity,
     this.name,
+    this.image,
+    this.colour,
     this.text,
     this.date,
   });
@@ -19,40 +23,28 @@ class ChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = User.of(context);
-
+    final textTheme = Theme.of(context).textTheme;
     final isMyMessage = user.id == identity;
 
     final avatar = Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       child: CircleAvatar(
-        child: SvgPicture.network(user.image),
+        backgroundColor: this.colour,
+        child: SvgPicture.network(this.image),
       ),
     );
 
-    final nameAndMessage = Expanded(
-      child: Column(
-        crossAxisAlignment: 
-            isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,        
-        children: <Widget>[
-          Text(this.name, style: Theme.of(context).textTheme.subhead),
-          Container(
-            margin: const EdgeInsets.only(top: 5.0),
-            child: Text(text),
-          )
-        ],
+    return ListTile(
+      dense: true,
+      contentPadding: EdgeInsets.symmetric(horizontal: 5),
+      leading: isMyMessage ? null : avatar,
+      trailing: isMyMessage ? avatar : null,
+      title: Text(
+        isMyMessage ? '${this.name} (you)' : this.name,
+        style: textTheme.subhead.copyWith(fontWeight: FontWeight.bold),
       ),
-    );
-
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment:
-            isMyMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: <Widget>[
-          isMyMessage ? nameAndMessage : avatar,
-          isMyMessage ? avatar : nameAndMessage,
-        ],
+      subtitle: Text(
+        this.text,
+        style: textTheme.subhead,
       ),
     );
   }

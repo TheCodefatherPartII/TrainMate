@@ -1,8 +1,6 @@
 import 'package:code_input/code_input.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trainmate/api.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -112,7 +110,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   child: RaisedButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: _goToChatPage,
-                    color: Colors.deepOrange,
+                    color: Theme.of(context).primaryColor,
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                     ),

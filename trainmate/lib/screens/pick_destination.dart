@@ -46,7 +46,7 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
     }
 
     final Widget svg =
-        new SvgPicture.asset('images/train_logo.svg', width: 20, height: 20);
+        SvgPicture.asset('images/train_logo.svg', width: 20, height: 20);
 
     return Scaffold(
       appBar: AppBar(
@@ -63,14 +63,10 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
                     leading: svg,
                     title: Text(
                         stop.name.replaceAll(
-                            new RegExp(r" station$", caseSensitive: false), ""),
+                            RegExp(r" station$", caseSensitive: false), ""),
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     trailing: Text(
-                        stop.arrivalTime
-                                .difference(DateTime.now())
-                                .inMinutes
-                                .toString() +
-                            "m away",
+                        'in ${stop.arrivalTime.difference(DateTime.now()).inMinutes} mins',
                         style: TextStyle(
                           color: Colors.grey,
                           fontStyle: FontStyle.italic,
@@ -105,7 +101,7 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
                           Container(
                             width: 20.0,
                             height: 20.0,
-                            decoration: new BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),

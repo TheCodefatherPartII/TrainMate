@@ -17,11 +17,8 @@ const firstPart = [
   "Cuddly",
   "Icy",
   "Soft",
-  "Melted",
   "Sticky",
   "Dry",
-  "Painful",
-  "Tender",
   "Dusty",
   "Prickly",
   "Shaggy",
@@ -32,20 +29,16 @@ const firstPart = [
 
 const secondPart = [
   "Panther",
-  "Wildcat",
   "Tiger",
   "Lion",
   "Cheetah",
   "Cougar",
   "Leopard",
   "Viper",
-  "Cottonmouth",
   "Python",
   "Boa",
-  "Sidewinder",
   "Cobra",
   "Grizzly",
-  "Jackal",
   "Falcon",
   "Wildebeest",
   "Gazelle",
@@ -53,11 +46,9 @@ const secondPart = [
   "Elk",
   "Moose",
   "Deer",
-  "Stag",
   "Pony",
   "Koala",
   "Sloth",
-  "Mermaid",
   "Unicorn",
   "Yeti",
   "Pegasus",
@@ -98,11 +89,6 @@ const secondPart = [
   "Drum",
   "Banjo",
   "Mask",
-  "Hammer",
-  "Drill",
-  "Wrench",
-  "Mixer",
-  "Router",
   "Vacuum",
 ];
 
@@ -124,7 +110,7 @@ Color pickColour() {
 class User extends Model {
   User(this.id) {
     this.name = pickName();
-    this.image = "https://avatars.dicebear.com/v2/human/${this.id}.svg";
+    this.image = "https://avatars.dicebear.com/v2/human/${this.id}.svg?t=${Random().nextInt(4)}";
     this.colour = pickColour();
   }
 

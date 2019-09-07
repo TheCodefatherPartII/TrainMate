@@ -22,8 +22,11 @@ Future<TripDetails> getTrip(String carriageId) async {
   final myTrip = allTrips.isNotEmpty ? allTrips.first : TripDetails();
   myTrip.occupancy = myTrip.occupancy ?? <int>[1, 2, 3, 5, 2, 4, 1, 1];
 
-  final now = DateTime.now();
-  DateTime nextTime() => now.add(new Duration(minutes: next(0, 90)));
+  var now = DateTime.now();
+  DateTime nextTime() {
+    now = now.add(new Duration(minutes: next(5, 10)));
+    return now;
+  }
 
   myTrip.stops = [
     RouteStop(

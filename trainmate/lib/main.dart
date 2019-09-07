@@ -8,21 +8,17 @@ import 'package:uuid/uuid.dart';
 
 import 'package:trainmate/theme.dart';
 
-void main() {
-  // generate unique session id on app start
-  final userId = Uuid().v4();
-  runApp(MyApp(userId: userId));
-}
+// generate unique session id on app start
+final user = User(Uuid().v4());
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  MyApp({this.userId});
-  final String userId;
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScopedModel<User>(
-      model: User(userId),
+      model: user,
       child: MaterialApp(
         title: 'TrainMate',
         theme: codefatherTheme,
@@ -37,8 +33,10 @@ class MyApp extends StatelessWidget {
                 builder: (c) => ChatPage(
                   title: args["title"],
                   trip: args["trip"],
+                  destination: args["destination"],
                 ),
               );
+
             case '/pick-destination':
               return MaterialPageRoute(
                 settings: settings,
