@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:trainmate/api.dart';
 import 'package:trainmate/models/models.dart';
+
 
 class PickDestinationPage extends StatefulWidget {
   final String carriageId;
@@ -26,28 +28,20 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
   void getTripDetails() async {
     final res = await getTrip(widget.carriageId);
 
-    Future.delayed(const Duration(seconds: 5), ()
+    Future.delayed(const Duration(seconds: 1), ()
     {
       setState(() {
         loading = false;
         trip = res;
       });
-
-      Navigator.of(context)
-          .pushNamed(
-          '/chat', arguments: {'title': res?.routeName, 'trip': res});
     });
   }
 
-//  _goToChatPage() async {
-//    final trip = await getTrip(_carriageController.text?.trim());
-//
-//    Navigator.push(
-//      context,
-//      MaterialPageRoute(
-//          builder: (context) => ChatPage(title: trip?.routeDescription)),
-//    );
-//  }
+  _goToChatPage(stop) async {
+    Navigator.of(context)
+        .pushNamed(
+        '/chat', arguments: {'destination': stop, 'title': this.trip.routeName, 'trip': this.trip});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +49,34 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
       return loadingPage();
     }
 
+    final Widget svg = new SvgPicture.asset('images/train_logo.svg', width: 20, height: 20);
 
     return Scaffold(
+        appBar: AppBar(
+          title: Text('Select Destination'),
+        ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text("Need Help?", style: TextStyle(fontSize: 12)),
-              ),
-            ],
+          child: ListView(
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: trip.stops.map((stop) =>
+             ListTile(
+               onTap: () => _goToChatPage(stop),
+            leading: svg,
+            title: Text(stop.name.replaceAll(new RegExp(r" station$", caseSensitive: false), ""), style: TextStyle(fontWeight: FontWeight.bold)),
+              trailing: Text(stop.arrivalTime.difference(DateTime.now()).inMinutes.toString() + "m away", style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic)),
+             ),
+            ).toList()
+            ).toList()
           ),
         ));
   }
 
   loadingPage() {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Loading Destinations...'),
+      ),
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
