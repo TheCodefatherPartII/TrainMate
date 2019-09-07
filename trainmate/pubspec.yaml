@@ -19,6 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.4.0+1
+  firebase_database: ^3.0.7
+
   json_annotation: ^2.0.0
   timeago: ^2.0.10
   flutter_svg: 0.14.1
@@ -42,8 +45,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-#  assets:
-#    - lib/assets/images/xx.jpg
+  assets:
+    - images/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
