@@ -1,6 +1,9 @@
+import 'package:code_input/code_input.dart';
+
 import 'package:flutter/material.dart';
 import 'package:trainmate/api.dart';
 import 'package:trainmate/screens/chat_page.dart';
+import 'package:trainmate/screens/pick_destination.dart';
 import 'package:trainmate/screens/train_occupancy.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -22,18 +25,28 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  TextEditingController _carriageController = new TextEditingController();
+  int carriageId;
+
+  final CodeInputBuilder codeInputBuilder = CodeInputBuilders.containerized(
+    emptySize: new Size(45, 60),
+    filledSize: new Size(60, 60),
+    totalSize: new Size(60, 60),
+
+    emptyDecoration: new BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
+    filledDecoration: null,
+
+    emptyTextStyle: null,
+    filledTextStyle: new TextStyle(color: Colors.black87, fontSize: 35.0)
+  );
 
   final controller = TextEditingController();
 
   _goToChatPage() async {
-    final trip = await getTrip(_carriageController.text?.trim());
-
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ChatPage(title: trip?.routeDescription)),
-    );
+          builder: (context) => PickDestinationPage(carriageId: carriageId),
+    ));
   }
 
   @override
@@ -73,21 +86,24 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ),
               ),
               new Text("Hello", style: TextStyle(fontSize: 28)),
-              Padding(
-                padding: EdgeInsets.all(20.0),
-                child: TextField(
-                  controller: _carriageController,
-                  decoration: InputDecoration(hintText: "Enter carriage no"),
+              new Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+                child: CodeInput(
+                  length: 4,
                   keyboardType: TextInputType.number,
-                  style: TextStyle(fontSize: 20),
-                ),
+                  builder: codeInputBuilder,
+                  onFilled: (value) => carriageId = int.parse(value.trim()),
+                )
               ),
               ButtonTheme(
-                  minWidth: 100.0,
+                  minWidth: 150.0,
                   child: RaisedButton(
                     padding: EdgeInsets.all(10.0),
                     onPressed: _goToChatPage,
-                    color: Color.fromRGBO(0, 188, 212, 1.0),
+                    color: Colors.deepOrange,
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     child: const Text('GO',
                         style: TextStyle(fontSize: 20, color: Colors.white)),
                   )),
