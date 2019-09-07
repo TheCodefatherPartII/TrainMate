@@ -24,20 +24,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
   String carriageId;
 
   final CodeInputBuilder codeInputBuilder = CodeInputBuilders.containerized(
-    emptySize: new Size(45, 60),
-    filledSize: new Size(60, 60),
-    totalSize: new Size(60, 60),
-
-    emptyDecoration: new BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
-    filledDecoration: null,
-
-    emptyTextStyle: null,
-    filledTextStyle: new TextStyle(color: Colors.black87, fontSize: 35.0)
-  );
+      emptySize: Size(45, 60),
+      filledSize: Size(60, 60),
+      totalSize: Size(60, 60),
+      emptyDecoration:
+          BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
+      filledDecoration: null,
+      emptyTextStyle: null,
+      filledTextStyle: TextStyle(color: Colors.black87, fontSize: 35.0));
 
   final controller = TextEditingController();
 
-  _goToChatPage() async {
+  _chooseYourDestination() async {
     FocusScope.of(context).unfocus();
 
     Navigator.of(context).pushNamed(
@@ -48,86 +46,58 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-        body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Column(
-            // Column is also layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // a  xis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Container(
-                height: 280,
-                child: new Padding(
+        resizeToAvoidBottomPadding: true,
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/background.png'),
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
                   padding: EdgeInsets.all(80.0),
-                  child: new Image.asset(
-                    'images/logo_w.png',
+                  child: Image.asset('images/logo_w.png'),
+                ),
+                Spacer(),
+                Text("Enter your carriage number",
+                    style: TextStyle(fontSize: 20)),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    child: CodeInput(
+                      length: 4,
+                      keyboardType: TextInputType.number,
+                      builder: codeInputBuilder,
+                      onFilled: (value) {
+                        setState(() {
+                          carriageId = value.trim();
+                        });
+                      },
+                    )),
+                RaisedButton(
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 40),
+                  onPressed: _chooseYourDestination,
+                  color: Theme.of(context).primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: const Text(
+                    'JOIN',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/background.png'),
-                    fit: BoxFit.fitWidth,
-                  ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text("Need Help?", style: TextStyle(fontSize: 12)),
                 ),
-              ),
-              Spacer(),
-              new Text("Hello", style: TextStyle(fontSize: 28)),
-              new Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-                child: CodeInput(
-                  length: 4,
-                  keyboardType: TextInputType.number,
-                  builder: codeInputBuilder,
-                  onFilled: (value) {
-                    setState(() {
-                     carriageId = value.trim(); 
-                    });
-                  },
-                )
-              ),
-              ButtonTheme(
-                  minWidth: 150.0,
-                  child: RaisedButton(
-                    padding: EdgeInsets.all(10.0),
-                    onPressed: _goToChatPage,
-                    color: Theme.of(context).primaryColor,
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0),
-                    ),
-                    child: const Text('GO',
-                        style: TextStyle(fontSize: 20, color: Colors.white)),
-                  )),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text("Need Help?", style: TextStyle(fontSize: 12)),
-              ),
-              IconButton(
-                icon: Icon(Icons.camera),
-                iconSize: 30,
-                tooltip: 'Take a picture of train carriage number',
-                onPressed: () {},
-              ),
-            ],
+                Spacer(),
+              ],
+            ),
           ),
         ));
   }
