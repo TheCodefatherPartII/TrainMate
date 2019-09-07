@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 const String _name = "Anonymous";
 
 class ChatMessage extends StatelessWidget {
+
   final String text;
+  final DateTime date;
 
 // constructor to get text from textfield
   ChatMessage({
-    this.text
+    this.text,
+    this.date
   });
 
   @override
