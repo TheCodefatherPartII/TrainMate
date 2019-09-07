@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:trainmate/animation/slide_left_route.dart';
 import 'package:trainmate/api.dart';
 import 'package:trainmate/models/models.dart';
+import 'package:trainmate/screens/chat_page.dart';
 
 class PickDestinationPage extends StatefulWidget {
   final String carriageId;
@@ -32,11 +34,7 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
   }
 
   _goToChatPage(stop) async {
-    Navigator.of(context).pushNamed('/chat', arguments: {
-      'destination': stop,
-      'title': this.trip.routeName,
-      'trip': this.trip
-    });
+    Navigator.push(context, SlideLeftRoute(page: ChatPage(destination: stop,title: this.trip.routeName, trip: this.trip)));
   }
 
   @override

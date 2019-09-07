@@ -70,8 +70,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     child: CodeInput(
-                      length: 4,
-                      keyboardType: TextInputType.number,
+                      length: 5,
+                      keyboardType: TextInputType.text,
                       builder: codeInputBuilder,
                       onFilled: (value) {
                         setState(() {
