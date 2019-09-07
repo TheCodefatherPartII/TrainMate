@@ -6,7 +6,12 @@ class DriverCarriage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(topRight: Radius.circular(15)),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(2),
+          bottomLeft: Radius.circular(2),
+          bottomRight: Radius.circular(2),
+          topRight: Radius.circular(15),
+        ),
         color: Colors.grey,
       ),
       width: 30,
@@ -31,7 +36,7 @@ class TrainOccupancyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.only(bottom: 10.0, top: 10.0, left: 20),
-      height: 25.0,
+      height: 20.0,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -48,13 +53,19 @@ class TrainOccupancyWidget extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(2),
               border: isActive
-                  ? Border.all(width: 3, color: Theme.of(context).accentColor)
+                  ? Border.all(width: 2, color: Theme.of(context).accentColor)
                   : null,
             ),
             margin: EdgeInsets.symmetric(horizontal: 2),
             child: Container(
-              color: getOccupancyColor(carriageOccupancy[index]),
+              decoration: BoxDecoration(
+                color: getOccupancyColor(carriageOccupancy[index]),
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(2),
+                ),
+              ),
               margin: EdgeInsets.only(top: margin),
             ),
             width: 38.0,
