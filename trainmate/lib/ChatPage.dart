@@ -23,9 +23,13 @@ class ChatScreenState extends State<ChatScreen> {
   final TextEditingController _chatController = new TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
 
+  final String identity = "anonymouse-id-from-firebase";
+
   void _handleSubmit(String text) {
     _chatController.clear();
+
     ChatMessage message = new ChatMessage(
+        identity: identity,
         text: text
     );
 
