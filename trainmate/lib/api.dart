@@ -11,8 +11,6 @@ final _random = new Random();
 int next(int min, int max) => min + _random.nextInt(max - min);
 
 Future<TripDetails> getTrip(String carriageId) async {
-  sleep(Duration(seconds: 7));
-
   final res = await http.get('https://zw19q95ckk.execute-api.ap-southeast-2.amazonaws.com/prod/');
 
   List<TripDetails> allTrips = json.decode(res.body).map<TripDetails>((v) => TripDetails.fromJson(v)).toList();
