@@ -20,15 +20,14 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-
   bool _gotCarriageNumber = false;
   TextEditingController _carriageController = new TextEditingController();
-
 
   _goToChatPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ChatPage(title: _carriageController.text)),
+      MaterialPageRoute(
+          builder: (context) => ChatPage(title: _carriageController.text)),
     );
   }
 
@@ -66,18 +65,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
             // horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.camera),
-                iconSize: 60,
-                tooltip: 'Take a picture of train carriage number',
-                onPressed: () {},
-              ),
+              new Text("Hello", style: TextStyle(fontSize: 28)),
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: TextField(
                   controller: _carriageController,
                   style: TextStyle(fontSize: 20),
-                  decoration: InputDecoration(hintText: "Enter carrigae"),
+                  decoration: InputDecoration(hintText: "Enter carriage no"),
                 ),
               ),
               ButtonTheme(
@@ -89,6 +83,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     child: const Text('GO',
                         style: TextStyle(fontSize: 20, color: Colors.white)),
                   )),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text("Need Help?", style: TextStyle(fontSize: 12)),
+              ),
+              IconButton(
+                icon: Icon(Icons.camera),
+                iconSize: 30,
+                tooltip: 'Take a picture of train carriage number',
+                onPressed: () {},
+              ),
             ],
           ),
         ));
