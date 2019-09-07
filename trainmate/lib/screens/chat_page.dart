@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
-import 'chatmessage.dart';
+import 'package:trainmate/screens/chat_message.dart';
 
 class ChatPage extends StatelessWidget {
-  // This widget is the root of your application.
+
+  ChatPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  _getTrainLine() {
+    switch (title) {
+      default: return "North Shore Line";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Flutter Chat"),
+          title: new Text(_getTrainLine()),
         ),
         body: new ChatScreen()
     );
@@ -23,9 +33,13 @@ class ChatScreenState extends State<ChatScreen> {
   final TextEditingController _chatController = new TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
 
+  final String identity = "anonymouse-id-from-firebase";
+
   void _handleSubmit(String text) {
     _chatController.clear();
+
     ChatMessage message = new ChatMessage(
+        identity: identity,
         text: text
     );
 

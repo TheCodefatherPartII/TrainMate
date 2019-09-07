@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trainmate/ChatPage.dart';
+import 'package:trainmate/api.dart';
+import 'package:trainmate/screens/chat_page.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -20,15 +21,17 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  bool _gotCarriageNumber = false;
-  String carId;
+  TextEditingController _carriageController = new TextEditingController();
 
   final controller = TextEditingController();
 
   _goToChatPage() async {
+    final trip = await getTrip(_carriageController.text?.trim());
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ChatPage()),
+      MaterialPageRoute(
+          builder: (context) => ChatPage(title: trip?.routeDescription)),
     );
   }
 
@@ -62,21 +65,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
             // Column has various properties to control how it sizes itself and
             // how it positions its children. Here we use mainAxisAlignment to
             // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
+            // a  xis because Columns are vertical (the cross axis would be
             // horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.camera),
-                iconSize: 60,
-                tooltip: 'Take a picture of train carriage number',
-                onPressed: () {},
-              ),
+              new Text("Hello", style: TextStyle(fontSize: 28)),
               Padding(
                 padding: EdgeInsets.all(20.0),
-                child: const TextField(
+                child: TextField(
+                  controller: _carriageController,
+                  decoration: InputDecoration(hintText: "Enter carriage no"),
+                  keyboardType: TextInputType.number,
                   style: TextStyle(fontSize: 20),
-                  decoration: InputDecoration(hintText: "Enter carriage"),
                 ),
               ),
               ButtonTheme(
@@ -88,6 +88,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     child: const Text('GO',
                         style: TextStyle(fontSize: 20, color: Colors.white)),
                   )),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text("Need Help?", style: TextStyle(fontSize: 12)),
+              ),
+              IconButton(
+                icon: Icon(Icons.camera),
+                iconSize: 30,
+                tooltip: 'Take a picture of train carriage number',
+                onPressed: () {},
+              ),
             ],
           ),
         ));

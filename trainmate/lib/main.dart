@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'OnboardingPage.dart';
-import 'ChatPage.dart';
+import 'package:trainmate/screens/onboarding_page.dart';
 
 import 'package:trainmate/theme.dart';
 

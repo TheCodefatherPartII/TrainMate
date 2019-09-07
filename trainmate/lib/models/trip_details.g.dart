@@ -14,7 +14,12 @@ TripDetails _$TripDetailsFromJson(Map<String, dynamic> json) {
       date: json['date'] as String,
       time: json['time'] as int,
       routeName: json['routeName'] as String,
-      routeDescription: json['routeDescription'] as String);
+      routeDescription: json['routeDescription'] as String,
+      occupancy: (json['occupancy'] as List)?.map((e) => e as int)?.toList())
+    ..stops = (json['stops'] as List)
+        ?.map((e) =>
+            e == null ? null : RouteStop.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$TripDetailsToJson(TripDetails instance) =>
@@ -24,5 +29,7 @@ Map<String, dynamic> _$TripDetailsToJson(TripDetails instance) =>
       'date': instance.date,
       'time': instance.time,
       'routeName': instance.routeName,
-      'routeDescription': instance.routeDescription
+      'routeDescription': instance.routeDescription,
+      'occupancy': instance.occupancy,
+      'stops': instance.stops?.map((e) => e?.toJson())?.toList()
     };

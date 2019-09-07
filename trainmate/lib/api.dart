@@ -8,9 +8,10 @@ import './models/models.dart';
 Future<TripDetails> getTrip(String carId) async {
   final res = await http.get('https://zw19q95ckk.execute-api.ap-southeast-2.amazonaws.com/prod/');
 
-  final allTrips = json.decode(res.body).map<TripDetails>((v) => TripDetails.fromJson(v)).toList();
+  List<TripDetails> allTrips = json.decode(res.body).map<TripDetails>((v) => TripDetails.fromJson(v)).toList();
 
-  final myTrip = allTrips.firstWhere((TripDetails t) => t.carriageIds.contains(carId ?? 'dne'), orElse: () => null);
+  // final myTrip = allTrips.firstWhere((TripDetails t) => t.carriageIds.contains(carId ?? 'dne'), orElse: () => null);
+  final myTrip = allTrips.isNotEmpty ? allTrips.first : TripDetails();
 
   myTrip.stops = [
     RouteStop(
