@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'chatmessage.dart';
+import 'package:trainmate/screens/chatmessage.dart';
 
 class ChatPage extends StatelessWidget {
   // This widget is the root of your application.

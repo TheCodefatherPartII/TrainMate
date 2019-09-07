@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:trainmate/models/trip.dart';
 
 part 'trip_instance.g.dart';
 

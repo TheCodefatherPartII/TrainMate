@@ -4,6 +4,7 @@ part 'trip_details.g.dart';
 
 @JsonSerializable()
 class TripDetails {
-  TripDetails()
-  
+  TripDetails(){
+    
+  }
 }
