@@ -4,7 +4,7 @@ import 'package:trainmate/screens/chat_message.dart';
 import 'package:trainmate/screens/train_occupancy.dart';
 
 import 'timeline.dart';
-import 'station.dart';
+import 'stop.dart';
 
 class ChatPage extends StatelessWidget {
 
@@ -38,7 +38,7 @@ class ChatScreenState extends State<ChatScreen> {
       stop: new RouteStop(
           id: "dummy-id",
           name: "Burwood",
-          arrivalTime: 1567849776,
+          arrivalTime: 1567849776 * 1000,
           delay: 0
       ),
       isCurrent: true,
@@ -47,7 +47,7 @@ class ChatScreenState extends State<ChatScreen> {
       stop: new RouteStop(
           id: "dummy-id",
           name: "Wynyard",
-          arrivalTime: 1567899776,
+          arrivalTime: 1567849776 * 1000,
           delay: 0
       ),
       isCurrent: false,

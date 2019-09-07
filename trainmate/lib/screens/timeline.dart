@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'station.dart';
+import 'stop.dart';
 
 class Timeline extends StatelessWidget {
 
@@ -10,17 +10,19 @@ class Timeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    int timeDiff = DateTime.fromMillisecondsSinceEpoch(stops.last.stop.arrivalTime).difference(DateTime.now()).inMinutes;
+    String timeDisplay = timeDiff < 0 ? "Missed your stop? Get off now!" : timeDiff < 3 ? "Arriving now, move towards the carrige door." : "Arriving in $timeDiff m.";
+
     return  Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         stops[0],
         spacer(),
         line(),
         spacer(),
-        stops[1],
-        new Expanded(
-            child: Text("Next Stop")
-        ),
+        stops.last,
+        Spacer(),
+        Text(timeDisplay),
       ],
     );
   }

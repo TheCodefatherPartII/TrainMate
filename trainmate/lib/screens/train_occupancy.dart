@@ -44,7 +44,6 @@ class TrainOccupancyWidget extends StatelessWidget {
   }
 
   Color getOccupancyColor(double margin) {
-    print(margin);
     if (margin == 0) {
       return Colors.red;
     } else if (margin > 0 && margin < 20.0) {
