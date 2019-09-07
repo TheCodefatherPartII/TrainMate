@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:trainmate/models/route_stop.dart';
 
@@ -41,6 +42,8 @@ Future<TripDetails> getTrip(String carId) async {
       name: 'Wynyard Station',
     ),
   ];
+
+  // debugPrint(myTrip.toJson().toString(), wrapWidth: 255);
 
   return myTrip;
 }

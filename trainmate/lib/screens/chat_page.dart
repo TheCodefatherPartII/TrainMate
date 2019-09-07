@@ -7,17 +7,11 @@ class ChatPage extends StatelessWidget {
 
   final String title;
 
-  _getTrainLine() {
-    switch (title) {
-      default: return "North Shore Line";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text(_getTrainLine()),
+          title: new Text(this.title),
         ),
         body: new ChatScreen()
     );
