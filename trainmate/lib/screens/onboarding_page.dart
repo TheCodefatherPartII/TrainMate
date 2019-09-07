@@ -1,6 +1,8 @@
 import 'package:code_input/code_input.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trainmate/api.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -76,12 +78,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Container(
-                child: new Image.asset(
-                  'images/logo.png',
-                  height: 60.0,
-                  fit: BoxFit.cover,
+                height: 280,
+                child: new Padding(
+                  padding: EdgeInsets.all(80.0),
+                  child: new Image.asset(
+                    'images/logo_w.png',
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/background.png'),
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
               ),
+              Spacer(),
               new Text("Hello", style: TextStyle(fontSize: 28)),
               new Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
