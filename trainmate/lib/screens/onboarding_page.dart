@@ -1,7 +1,6 @@
 import 'package:code_input/code_input.dart';
 
 import 'package:flutter/material.dart';
-import 'package:trainmate/api.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);

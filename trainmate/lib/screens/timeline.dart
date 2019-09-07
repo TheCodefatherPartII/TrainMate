@@ -37,7 +37,7 @@ class Timeline extends StatelessWidget {
     return Container(
       color: Colors.black,
       height: 5.0,
-      width: 60.0,
+      width: 120.0,
     );
   }
 }
