@@ -20,12 +20,15 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
+
   bool _gotCarriageNumber = false;
+  TextEditingController _carriageController = new TextEditingController();
+
 
   _goToChatPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ChatPage()),
+      MaterialPageRoute(builder: (context) => ChatPage(title: _carriageController.text)),
     );
   }
 
@@ -71,7 +74,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
               Padding(
                 padding: EdgeInsets.all(20.0),
-                child: const TextField(
+                child: TextField(
+                  controller: _carriageController,
                   style: TextStyle(fontSize: 20),
                   decoration: InputDecoration(hintText: "Enter carrigae"),
                 ),

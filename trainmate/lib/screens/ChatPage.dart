@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:trainmate/screens/chatmessage.dart';
+import 'package:trainmate/screens/ChatMessage.dart';
 
 class ChatPage extends StatelessWidget {
-  // This widget is the root of your application.
+
+  ChatPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  _getTrainLine() {
+    switch (title) {
+      default: return "North Shore Line";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Flutter Chat"),
+          title: new Text(_getTrainLine()),
         ),
         body: new ChatScreen()
     );
