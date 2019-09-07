@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainmate/screens/ChatMessage.dart';
+import 'package:trainmate/screens/chat_message.dart';
 
 class ChatPage extends StatelessWidget {
 

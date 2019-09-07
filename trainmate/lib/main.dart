@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainmate/screens/OnboardingPage.dart';
+import 'package:trainmate/screens/onboarding_page.dart';
 
 import 'package:trainmate/theme.dart';
 

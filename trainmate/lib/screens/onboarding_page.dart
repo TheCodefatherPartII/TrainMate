@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainmate/screens/ChatPage.dart';
+import 'package:trainmate/screens/chat_page.dart';
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
