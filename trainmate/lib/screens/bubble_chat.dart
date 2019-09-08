@@ -43,7 +43,7 @@ class Bubble extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: const EdgeInsets.all(3.0),
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
             border: Border.all(color: borderColour),
             color: bg,

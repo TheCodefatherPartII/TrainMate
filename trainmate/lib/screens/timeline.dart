@@ -42,17 +42,7 @@ class _TimelineState extends State<Timeline> {
       child: Row(
         children: <Widget>[
           widget.stops.first,
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius:
-                    BorderRadius.horizontal(right: Radius.elliptical(16, 4)),
-              ),
-              height: 5.0,
-              margin: EdgeInsets.symmetric(horizontal: 5),
-            ),
-          ),
+          Icon(Icons.arrow_forward, color: Colors.green),
           widget.stops.last,
           Spacer(),
           ConstrainedBox(
