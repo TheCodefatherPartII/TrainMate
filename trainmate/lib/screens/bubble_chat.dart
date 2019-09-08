@@ -61,13 +61,15 @@ class Bubble extends StatelessWidget {
                           size: 30,
                         )
                       : Container(),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(message,
-                        style: TextStyle(
-                          color: textColour,
-                          fontSize: 15.0,
-                        )),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(message,
+                          style: TextStyle(
+                            color: textColour,
+                            fontSize: 15.0,
+                          )),
+                    ),
                   )
                 ]),
               ),
