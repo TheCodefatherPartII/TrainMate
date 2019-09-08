@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:trainmate/animation/slide_left_route.dart';
-import 'package:trainmate/api.dart';
+import 'package:trainmate/api/api.dart';
 import 'package:trainmate/models/models.dart';
 import 'package:trainmate/screens/chat_page.dart';
 

@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:trainmate/models/route_stop.dart';
 
-import './models/models.dart';
+import '../models/models.dart';
 
 final _random = new Random();
 int next(int min, int max) => min + _random.nextInt(max - min);
