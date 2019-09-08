@@ -84,7 +84,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
       return;
     }
 
+    FocusScope.of(context).requestFocus(FocusNode());
     FocusScope.of(context).unfocus();
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
 
     Navigator.of(context).pushNamed(
       '/pick-destination',
