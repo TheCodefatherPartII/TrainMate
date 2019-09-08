@@ -6,9 +6,20 @@ import 'package:flutter/services.dart';
 class UppercaseTextInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    String newText = newValue.text.trim().toUpperCase().replaceAll("\s+", "");
+    String output = '';
+
+    if (newText.length >= 1) {
+      output = newText.substring(0, 1).replaceAll(r"[0-9]+", "");
+
+      if (newText.length >= 2) {
+        output += newText.substring(1).replaceAll(r"[A-Z]+", "");
+      }
+    }
+
     return TextEditingValue(
         selection: newValue.selection,
-        text: newValue.text.toUpperCase(),
+        text: output,
     );
   }
 }
@@ -108,7 +119,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     child: CodeInput(
                       length: 5,
-                      inputFormatters: [UppercaseTextInputFormatter()],
+                      inputFormatters: [new UppercaseTextInputFormatter(), new LengthLimitingTextInputFormatter(5)],
                       keyboardType: TextInputType.text,
                       builder: codeInputBuilder,
                       onChanged: (value) {
