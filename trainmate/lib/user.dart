@@ -32,7 +32,6 @@ const secondPart = [
   "Tiger",
   "Lion",
   "Cheetah",
-  "Cougar",
   "Leopard",
   "Viper",
   "Python",
