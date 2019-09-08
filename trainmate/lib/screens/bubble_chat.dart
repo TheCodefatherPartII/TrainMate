@@ -83,7 +83,7 @@ class Bubble extends StatelessWidget {
                     )),
               ),
               Positioned(
-                top: 8.0,
+                bottom: -2.0,
                 right: 0.0,
                 child: Icon(
                   icon,

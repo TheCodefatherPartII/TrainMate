@@ -55,12 +55,14 @@ class _ChatStreamState extends State<ChatStream> {
                 stream: getMessages(widget.tripId),
                 initialData: [],
                 builder: (ctx, snapshots) {
-                  if (_scrollController.positions?.isNotEmpty ?? false) {
-                    _scrollController.animateTo(
-                      _scrollController.position.maxScrollExtent,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeOut,
-                    );
+                  if (_scrollController.hasClients) {
+                    Future.delayed(Duration(seconds: 1), () {
+                      _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent,
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeOut,
+                      );
+                    });
                   }
 
                   return ListView.builder(
