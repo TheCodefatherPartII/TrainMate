@@ -16,6 +16,7 @@ class RouteStop {
   DateTime arrivalTime;
   int delay;
 
-  factory RouteStop.fromJson(Map<String, dynamic> json) => _$RouteStopFromJson(json);
-  Map<String, dynamic> toJson() => _$RouteStopToJson(this); 
+  factory RouteStop.fromJson(Map<String, dynamic> json) =>
+      _$RouteStopFromJson(json);
+  Map<String, dynamic> toJson() => _$RouteStopToJson(this);
 }

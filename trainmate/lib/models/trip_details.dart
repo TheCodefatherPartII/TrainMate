@@ -26,6 +26,7 @@ class TripDetails {
 
   List<RouteStop> stops;
 
-  factory TripDetails.fromJson(Map<String, dynamic> json) => _$TripDetailsFromJson(json);
-  Map<String, dynamic> toJson() => _$TripDetailsToJson(this); 
+  factory TripDetails.fromJson(Map<String, dynamic> json) =>
+      _$TripDetailsFromJson(json);
+  Map<String, dynamic> toJson() => _$TripDetailsToJson(this);
 }

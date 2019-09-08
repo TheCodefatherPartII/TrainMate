@@ -28,7 +28,7 @@ Future<TripDetails> getTrip(String carriageId) async {
     return now;
   }
 
-  if (myTrip.stops?.isNotEmpty ?? false) {
+  if (myTrip.stops?.isEmpty ?? true) {
     myTrip.stops = [
       RouteStop(
         id: 'asd1',
@@ -63,7 +63,7 @@ Future<TripDetails> getTrip(String carriageId) async {
     ];
   }
 
-  myTrip.stops.sort((s1, s2) => s1.arrivalTime.compareTo(s2.arrivalTime));
+  myTrip.stops?.sort((s1, s2) => s1.arrivalTime.compareTo(s2.arrivalTime));
 
   return myTrip;
 }

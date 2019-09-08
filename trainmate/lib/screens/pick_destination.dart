@@ -34,7 +34,13 @@ class _PickDestinationPageState extends State<PickDestinationPage> {
   }
 
   _goToChatPage(stop) async {
-    Navigator.push(context, SlideLeftRoute(page: ChatPage(destination: stop,title: this.trip.routeName, trip: this.trip)));
+    Navigator.push(
+        context,
+        SlideLeftRoute(
+            page: ChatPage(
+                destination: stop,
+                title: this.trip.routeName,
+                trip: this.trip)));
   }
 
   @override

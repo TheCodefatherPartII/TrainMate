@@ -8,7 +8,8 @@ import './timeline.dart';
 import './stop.dart';
 
 class ChatPage extends StatelessWidget {
-  ChatPage({Key key, this.title, this.trip, this.destination}) : super(key: key);
+  ChatPage({Key key, this.title, this.trip, this.destination})
+      : super(key: key);
 
   final String title;
   final RouteStop destination;
@@ -31,12 +32,12 @@ class ChatScreen extends StatelessWidget {
   final RouteStop destination;
 
   Widget _renderTimeline() => Container(
-      margin: EdgeInsets.only(top: 10, bottom: 10),
-      child: Timeline(stops: [
-        Stop(stop: trip.stops.first, isCurrent: true),
-        Stop(stop: destination, isCurrent: false),
-      ]),
-  );
+        margin: EdgeInsets.only(top: 10, bottom: 10),
+        child: Timeline(stops: [
+          Stop(stop: trip.stops.first, isCurrent: true),
+          Stop(stop: destination, isCurrent: false),
+        ]),
+      );
 
   @override
   Widget build(BuildContext context) {

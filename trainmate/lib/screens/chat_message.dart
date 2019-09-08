@@ -23,31 +23,31 @@ class ChatMessage extends StatelessWidget {
           delivered: true,
           isMe: false,
           isBroadcast: message.isBroadcast);
-    } else {
-      final avatar = Container(
-        child: CircleAvatar(
-          backgroundColor: message.colour,
-          child: SvgPicture.network(message.image),
-        ),
-      );
-
-      return ListTile(
-        dense: true,
-        contentPadding: EdgeInsets.symmetric(horizontal: 5),
-        leading: isMyMessage ? null : avatar,
-        trailing: isMyMessage ? avatar : null,
-        title: Text(
-          isMyMessage ? '${message.name} (you)' : message.name,
-          style: textTheme.subhead.copyWith(fontWeight: FontWeight.bold),
-          textAlign: isMyMessage ? TextAlign.right : TextAlign.left,
-        ),
-        subtitle: Bubble(
-            message: message.text,
-            time: DateFormat.jm().format(message.date),
-            delivered: true,
-            isMe: isMyMessage,
-            isBroadcast: message.isBroadcast),
-      );
     }
+
+    final avatar = Container(
+      child: CircleAvatar(
+        backgroundColor: message.colour,
+        child: SvgPicture.network(message.image),
+      ),
+    );
+
+    return ListTile(
+      dense: true,
+      contentPadding: EdgeInsets.symmetric(horizontal: 5),
+      leading: isMyMessage ? null : avatar,
+      trailing: isMyMessage ? avatar : null,
+      title: Text(
+        isMyMessage ? '${message.name} (you)' : message.name,
+        style: textTheme.subhead.copyWith(fontWeight: FontWeight.bold),
+        textAlign: isMyMessage ? TextAlign.right : TextAlign.left,
+      ),
+      subtitle: Bubble(
+          message: message.text,
+          time: DateFormat.jm().format(message.date),
+          delivered: true,
+          isMe: isMyMessage,
+          isBroadcast: message.isBroadcast),
+    );
   }
 }

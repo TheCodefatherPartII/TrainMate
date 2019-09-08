@@ -13,9 +13,9 @@ class Stop extends StatelessWidget {
       children: <Widget>[
         this.isCurrent
             ? Icon(Icons.train, color: Theme.of(context).primaryColor)
-            : Icon(Icons.flag,
-                color: Theme.of(context).primaryColor),
-        Text(stop.name.replaceAll(RegExp(r' station', caseSensitive: false), ''))
+            : Icon(Icons.flag, color: Theme.of(context).primaryColor),
+        Text(
+            stop.name.replaceAll(RegExp(r' station', caseSensitive: false), ''))
       ],
     );
   }

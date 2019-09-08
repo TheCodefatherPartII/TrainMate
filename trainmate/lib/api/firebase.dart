@@ -10,11 +10,10 @@ Stream<List<Message>> getMessages(String _something) {
       .collection('messages')
       .snapshots()
       .map((QuerySnapshot snapshot) {
-
     return snapshot.documents
         .map((document) => Message.fromJson(document.data))
         .toList()
-        ..sort((a,b) => a.date.compareTo(b.date));
+          ..sort((a, b) => a.date.compareTo(b.date));
   });
 }
 
