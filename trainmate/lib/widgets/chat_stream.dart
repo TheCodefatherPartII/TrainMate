@@ -21,7 +21,7 @@ class _ChatStreamState extends State<ChatStream> {
       name: fakeUsers[0].name,
       image: fakeUsers[0].image,
       colour: fakeUsers[0].colour,
-      text: 'Does anyone know a good coffee place near Strathfield?',
+      text: 'Train is running 5 mins late 😞. Sorry for inconvenience.',
       date: DateTime.now().subtract(Duration(minutes: 5)),
       isBroadcast: true,
       isMe: false,
