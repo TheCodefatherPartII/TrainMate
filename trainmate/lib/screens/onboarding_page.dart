@@ -1,6 +1,18 @@
 import 'package:code_input/code_input.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class UppercaseTextInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+        selection: newValue.selection,
+        text: newValue.text.toUpperCase(),
+    );
+  }
+}
+
 
 class OnboardingPage extends StatefulWidget {
   OnboardingPage({Key key, this.title}) : super(key: key);
@@ -96,6 +108,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     child: CodeInput(
                       length: 5,
+                      inputFormatters: [UppercaseTextInputFormatter()],
                       keyboardType: TextInputType.text,
                       builder: codeInputBuilder,
                       onChanged: (value) {
