@@ -98,19 +98,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       length: 5,
                       keyboardType: TextInputType.text,
                       builder: codeInputBuilder,
-                      onFilled: (value) {
+                      onChanged: (value) {
                         setState(() {
                           carriageId = value.trim();
 
-                          if (isDisabled && carriageId.length == 5) {
-                            setState(() {
-                              isDisabled = false;
-                            });
-                          } else if (!isDisabled && carriageId.length != 5) {
-                            setState(() {
-                              isDisabled = true;
-                            });
-                          }
+                          setState(() {
+                            isDisabled = carriageId.length != 5;
+                          });
                         });
                       },
                     )),
