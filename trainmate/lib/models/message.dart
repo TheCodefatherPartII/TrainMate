@@ -24,9 +24,12 @@ class Message {
   DateTime date;
   bool isBroadcast;
 
-  factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
-  Map<String, dynamic> toJson() => _$MessageToJson(this); 
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      _$MessageFromJson(json);
+  Map<String, dynamic> toJson() => _$MessageToJson(this);
 
-  static String _colourToJson(Color color) => '#${color.value.toRadixString(16)}';
-  static Color _colourFromJson(String color) => Color(int.parse(color.replaceFirst('#', ''), radix: 16));
+  static String _colourToJson(Color color) =>
+      '#${color.value.toRadixString(16)}';
+  static Color _colourFromJson(String color) =>
+      Color(int.parse(color.replaceFirst('#', ''), radix: 16));
 }

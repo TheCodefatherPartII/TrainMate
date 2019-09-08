@@ -54,7 +54,6 @@ class _ChatStreamState extends State<ChatStream> {
                 stream: getMessages(widget.tripId),
                 initialData: [],
                 builder: (ctx, snapshots) {
-
                   return ListView.builder(
                     itemCount: snapshots.data?.length,
                     itemBuilder: (ctx, index) {

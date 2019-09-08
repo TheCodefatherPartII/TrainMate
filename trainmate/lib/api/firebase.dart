@@ -8,11 +8,10 @@ Stream<List<Message>> getMessages(String tripId) {
       .collection('messages')
       .snapshots()
       .map((QuerySnapshot snapshot) {
-
     return snapshot.documents
         .map((document) => Message.fromJson(document.data))
         .toList()
-        ..sort((a,b) => a.date.compareTo(b.date));
+          ..sort((a, b) => a.date.compareTo(b.date));
   });
 }
 
