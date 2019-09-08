@@ -94,6 +94,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isKeyboardShowing = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return Scaffold(
         resizeToAvoidBottomPadding: true,
         body: Container(
@@ -106,17 +108,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(80.0),
+                  padding: EdgeInsets.only(left: 80, right: 80, bottom: isKeyboardShowing ? 120 : 240, top: 85),
                   child: Image.asset('images/logo_w.png'),
                 ),
-                Spacer(),
                 Text("Enter your carriage number",
                     style: TextStyle(fontSize: 20)),
                 Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                     child: CodeInput(
                       length: 5,
                       inputFormatters: [new UppercaseTextInputFormatter(), new LengthLimitingTextInputFormatter(5)],
@@ -125,27 +126,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       onChanged: (value) {
                         setState(() {
                           carriageId = value.trim();
-                          isDisabled = carriageId.length != 5;
+                          final isComplete = carriageId.length == 5;
+
+                          setState(() {
+                            isDisabled = !isComplete;
+                          });
+
+                          if (isComplete) {
+                            _chooseYourDestination();
+                          }
                         });
                       },
                     )),
-                RaisedButton(
-                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 40),
-                  onPressed: isDisabled ? null : _chooseYourDestination,
-                  color: Theme.of(context).primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: const Text(
-                    'JOIN',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text("Need Help?", style: TextStyle(fontSize: 12)),
-                ),
-                Spacer(),
               ],
             ),
           ),
