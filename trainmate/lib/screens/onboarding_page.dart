@@ -44,9 +44,7 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  String carriageId;
-  bool isDisabled = true;
-
+  final codeKey = GlobalKey();
   final CodeInputBuilder codeInputBuilder = CodeInputBuilders.containerized(
       emptySize: Size(45, 60),
       filledSize: Size(60, 60),
@@ -58,10 +56,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
       filledTextStyle: TextStyle(color: Colors.black87, fontSize: 35.0));
 
   final controller = TextEditingController();
+  final pattern = RegExp(r"[a-zA-Z]\d{4}");
 
-  _chooseYourDestination() async {
-    final pattern = new RegExp(r"[a-zA-Z]\d{4}");
-
+  _chooseYourDestination(carriageId) async {
     if (!pattern.hasMatch(carriageId)) {
       showDialog<void>(
         context: context,
@@ -84,6 +81,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
       return;
     }
 
+    (codeKey.currentState as dynamic).controller.clear();
+    
     FocusScope.of(context).requestFocus(FocusNode());
     FocusScope.of(context).unfocus();
     SystemChannels.textInput.invokeMethod('TextInput.hide');
@@ -122,22 +121,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                     child: CodeInput(
                       length: 5,
-                      inputFormatters: [new UppercaseTextInputFormatter(), new LengthLimitingTextInputFormatter(5)],
+                      inputFormatters: [UppercaseTextInputFormatter(), LengthLimitingTextInputFormatter(5)],
                       keyboardType: TextInputType.text,
+                      key: codeKey,
                       builder: codeInputBuilder,
-                      onChanged: (value) {
-                        setState(() {
-                          carriageId = value.trim();
-                          final isComplete = carriageId.length == 5;
-
-                          setState(() {
-                            isDisabled = !isComplete;
-                          });
-
-                          if (isComplete) {
-                            _chooseYourDestination();
-                          }
-                        });
+                      onFilled: (code) {
+                        _chooseYourDestination(code);
                       },
                     )),
               ],
