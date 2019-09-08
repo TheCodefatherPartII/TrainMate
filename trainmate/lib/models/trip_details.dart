@@ -13,6 +13,7 @@ class TripDetails {
     this.routeName,
     this.routeDescription,
     this.occupancy,
+    this.stops,
   });
 
   String id;

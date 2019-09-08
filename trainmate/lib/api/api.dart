@@ -13,10 +13,10 @@ Future<TripDetails> getTrip(String carriageId) async {
   final res = await http
       .get('https://zw19q95ckk.execute-api.ap-southeast-2.amazonaws.com/prod/');
 
-  List<TripDetails> allTrips = json
-      .decode(res.body)
-      .map<TripDetails>((v) => TripDetails.fromJson(v))
-      .toList();
+  final jsonResult = json.decode(res.body);
+
+  List<TripDetails> allTrips =
+      jsonResult.map<TripDetails>((v) => TripDetails.fromJson(v)).toList();
 
   // final myTrip = allTrips.firstWhere((TripDetails t) => t.carriageIds.contains(carId ?? 'dne'), orElse: () => null);
   final myTrip = allTrips.isNotEmpty ? allTrips.first : TripDetails();
@@ -63,7 +63,15 @@ Future<TripDetails> getTrip(String carriageId) async {
     ];
   }
 
-  myTrip.stops?.sort((s1, s2) => s1.arrivalTime.compareTo(s2.arrivalTime));
+  myTrip.stops?.forEach((s) {
+    s.name = s.name.replaceAll(RegExp(r' Station.+'), '');
+    // s.arrivalTime.add(Duration(microseconds: DateTime(2019, 9, 8).microsecondsSinceEpoch));
+  });
+  final nowMins = DateTime.now().subtract(Duration(seconds: 10));
+  myTrip.stops = myTrip.stops
+      .where((s) => s.arrivalTime.isAfter(nowMins)).toList();
+  
+  myTrip.stops.sort((s1, s2) => s1.arrivalTime.compareTo(s2.arrivalTime));
 
   return myTrip;
 }

@@ -4,8 +4,10 @@ class Bubble extends StatelessWidget {
   Bubble(
       {this.message, this.time, this.delivered, this.isMe, this.isBroadcast});
 
-  final String message, time;
-  final delivered, isMe;
+  final String message;
+  final String time;
+  final bool delivered;
+  final bool isMe;
   final bool isBroadcast;
 
   @override
@@ -55,20 +57,13 @@ class Bubble extends StatelessWidget {
                 padding: EdgeInsets.only(right: 48.0),
                 child: Row(children: <Widget>[
                   isBroadcast
-                      ? Icon(
-                          Icons.notifications,
-                          color: Colors.white,
-                          size: 30,
-                        )
+                      ? Icon(Icons.notifications, color: Colors.white, size: 30)
                       : Container(),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Text(message,
-                          style: TextStyle(
-                            color: textColour,
-                            fontSize: 15.0,
-                          )),
+                          style: TextStyle(color: textColour, fontSize: 15.0)),
                     ),
                   )
                 ]),
@@ -77,19 +72,12 @@ class Bubble extends StatelessWidget {
                 top: -2.0,
                 right: 0.0,
                 child: Text(time,
-                    style: TextStyle(
-                      color: metaTextColour,
-                      fontSize: 10.0,
-                    )),
+                    style: TextStyle(color: metaTextColour, fontSize: 10.0)),
               ),
               Positioned(
                 bottom: -2.0,
                 right: 0.0,
-                child: Icon(
-                  icon,
-                  size: 12.0,
-                  color: metaTextColour,
-                ),
+                child: Icon(icon, size: 12.0, color: metaTextColour),
               )
             ],
           ),

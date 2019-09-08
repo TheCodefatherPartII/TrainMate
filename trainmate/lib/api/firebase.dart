@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:trainmate/models/message.dart';
 
-final String tripId = '670A.442.125.2.T.8.58577537';
-
-Stream<List<Message>> getMessages(String _something) {
+Stream<List<Message>> getMessages(String tripId) {
   return Firestore.instance
       .collection('channels')
       .document('$tripId')
@@ -17,7 +15,7 @@ Stream<List<Message>> getMessages(String _something) {
   });
 }
 
-void sendMessage(String _something, Message message) {
+void sendMessage(String tripId, Message message) {
   Firestore.instance
       .collection('channels')
       .document('$tripId')

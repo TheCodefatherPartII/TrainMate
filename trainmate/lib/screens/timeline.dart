@@ -14,19 +14,32 @@ class Timeline extends StatefulWidget {
 
 class _TimelineState extends State<Timeline> {
   int timeDiff = 0;
-  
+  Timer refreshTimer;
+
   @override
   void initState() {
     super.initState();
 
     timeDiff =
         widget.stops.last.stop.arrivalTime.difference(DateTime.now()).inMinutes;
-    
-    Timer.periodic(Duration(seconds: 5), (Timer t) => setState(() {
-      timeDiff =
-        widget.stops.last.stop.arrivalTime.difference(DateTime.now()).inMinutes;
-    }));
 
+    refreshTimer = Timer.periodic(Duration(seconds: 5), (Timer t) {
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        timeDiff = widget.stops.last.stop.arrivalTime
+            .difference(DateTime.now())
+            .inMinutes;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    refreshTimer?.cancel();
+    super.dispose();
   }
 
   @override

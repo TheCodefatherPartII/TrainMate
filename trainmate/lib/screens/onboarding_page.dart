@@ -114,10 +114,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       onChanged: (value) {
                         setState(() {
                           carriageId = value.trim();
-
-                          setState(() {
-                            isDisabled = carriageId.length != 5;
-                          });
+                          isDisabled = carriageId.length != 5;
                         });
                       },
                     )),

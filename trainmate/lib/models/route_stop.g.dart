@@ -10,14 +10,15 @@ RouteStop _$RouteStopFromJson(Map<String, dynamic> json) {
   return RouteStop(
       id: json['id'] as String,
       name: json['name'] as String,
-      arrivalTime:
-          DateTime.fromMicrosecondsSinceEpoch(json['arrivalTime'] as int),
+      arrivalTime: json['time'] == null
+          ? null
+          : RouteStop._convertTime(json['time'] as String),
       delay: json['delay'] as int);
 }
 
 Map<String, dynamic> _$RouteStopToJson(RouteStop instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'arrivalTime': instance.arrivalTime,
+      'time': instance.arrivalTime?.toIso8601String(),
       'delay': instance.delay
     };
