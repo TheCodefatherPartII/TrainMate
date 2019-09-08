@@ -28,38 +28,40 @@ Future<TripDetails> getTrip(String carriageId) async {
     return now;
   }
 
-  myTrip.stops = [
-    RouteStop(
-      id: 'asd1',
-      name: 'Parramatta Station',
-      arrivalTime: nextTime(),
-    ),
-    RouteStop(
-      id: 'asd2',
-      name: 'Strathfield Station',
-      arrivalTime: nextTime(),
-    ),
-    RouteStop(
-      id: 'asd3',
-      name: 'Redfern Station',
-      arrivalTime: nextTime(),
-    ),
-    RouteStop(
-      id: 'asd4',
-      name: 'Central Station',
-      arrivalTime: nextTime(),
-    ),
-    RouteStop(
-      id: 'asd5',
-      name: 'Town Hall Station',
-      arrivalTime: nextTime(),
-    ),
-    RouteStop(
-      id: 'asd6',
-      name: 'Wynyard Station',
-      arrivalTime: nextTime(),
-    ),
-  ];
+  if (myTrip.stops?.isNotEmpty ?? false) {
+    myTrip.stops = [
+      RouteStop(
+        id: 'asd1',
+        name: 'Parramatta Station',
+        arrivalTime: nextTime(),
+      ),
+      RouteStop(
+        id: 'asd2',
+        name: 'Strathfield Station',
+        arrivalTime: nextTime(),
+      ),
+      RouteStop(
+        id: 'asd3',
+        name: 'Redfern Station',
+        arrivalTime: nextTime(),
+      ),
+      RouteStop(
+        id: 'asd4',
+        name: 'Central Station',
+        arrivalTime: nextTime(),
+      ),
+      RouteStop(
+        id: 'asd5',
+        name: 'Town Hall Station',
+        arrivalTime: nextTime(),
+      ),
+      RouteStop(
+        id: 'asd6',
+        name: 'Wynyard Station',
+        arrivalTime: nextTime(),
+      ),
+    ];
+  }
 
   myTrip.stops.sort((s1, s2) => s1.arrivalTime.compareTo(s2.arrivalTime));
 

@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
     return ScopedModel<User>(
       model: user,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        debugShowMaterialGrid: false,
         title: 'TrainMate',
         theme: codefatherTheme,
         home: OnboardingPage(title: 'TrainMate'),

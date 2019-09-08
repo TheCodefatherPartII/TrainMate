@@ -15,6 +15,7 @@ class ChatStream extends StatefulWidget {
 
 class _ChatStreamState extends State<ChatStream> {
   final _chatController = TextEditingController();
+  final _scrollController = ScrollController();
 
   void _handleSubmit() {
     final value = _chatController.text;
@@ -54,8 +55,16 @@ class _ChatStreamState extends State<ChatStream> {
                 stream: getMessages(widget.tripId),
                 initialData: [],
                 builder: (ctx, snapshots) {
+                  if (_scrollController.positions?.isNotEmpty ?? false) {
+                    _scrollController.animateTo(
+                      _scrollController.position.maxScrollExtent,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeOut,
+                    );
+                  }
 
                   return ListView.builder(
+                    controller: _scrollController,
                     itemCount: snapshots.data?.length,
                     itemBuilder: (ctx, index) {
                       if (snapshots.data?.isEmpty ?? true) {
