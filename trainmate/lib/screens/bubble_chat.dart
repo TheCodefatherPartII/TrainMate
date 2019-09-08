@@ -13,11 +13,16 @@ class Bubble extends StatelessWidget {
     final bg = isBroadcast
         ? Color.lerp(Theme.of(context).primaryColor, Colors.white, 0.25)
         : (isMe ? Colors.white : Colors.greenAccent.shade100);
-    final align = isBroadcast ? CrossAxisAlignment.stretch : isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
+    final align = isBroadcast
+        ? CrossAxisAlignment.stretch
+        : isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
     final icon = delivered ? Icons.done_all : Icons.done;
     final textColour = isBroadcast ? Colors.white : Colors.black54;
-    final metaTextColour = isBroadcast ? Colors.white.withOpacity(0.75) : Colors.black38;
-    final borderColour = isBroadcast ? Theme.of(context).primaryColor : (isMe ? Colors.black38 : Colors.greenAccent.shade700);
+    final metaTextColour =
+        isBroadcast ? Colors.white.withOpacity(0.75) : Colors.black38;
+    final borderColour = isBroadcast
+        ? Theme.of(context).primaryColor
+        : (isMe ? Colors.black38 : Colors.greenAccent.shade700);
 
     final radius = isBroadcast
         ? BorderRadius.circular(10.0)
@@ -48,11 +53,23 @@ class Bubble extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(right: 48.0),
-                child: Text(message,
-                    style: TextStyle(
-                      color: textColour,
-                      fontSize: 15.0,
-                    )),
+                child: Row(children: <Widget>[
+                  isBroadcast
+                      ? Icon(
+                          Icons.notifications,
+                          color: Colors.white,
+                          size: 30,
+                        )
+                      : Container(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(message,
+                        style: TextStyle(
+                          color: textColour,
+                          fontSize: 15.0,
+                        )),
+                  )
+                ]),
               ),
               Positioned(
                 top: -2.0,
@@ -64,14 +81,14 @@ class Bubble extends StatelessWidget {
                     )),
               ),
               Positioned(
-                  top: 8.0,
-                  right: 0.0,
-                  child: Icon(
-                      icon,
-                      size: 12.0,
-                      color: metaTextColour,
-                    ),
-                  )
+                top: 8.0,
+                right: 0.0,
+                child: Icon(
+                  icon,
+                  size: 12.0,
+                  color: metaTextColour,
+                ),
+              )
             ],
           ),
         )

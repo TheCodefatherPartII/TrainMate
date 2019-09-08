@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({this.message});
+
   final Message message;
 
   @override
