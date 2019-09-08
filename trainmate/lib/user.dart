@@ -110,7 +110,7 @@ Color pickColour() {
 class User extends Model {
   User(this.id) {
     this.name = pickName();
-    this.image = "https://avatars.dicebear.com/v2/human/${this.id}.svg?t=${Random().nextInt(4)}";
+    this.image = "https://avatars.dicebear.com/v2/human/${this.id}.svg?t=${Random().nextInt(256).toRadixString(16)}";
     this.colour = pickColour();
   }
 

@@ -15,20 +15,21 @@ class ChatMessage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final isMyMessage = user.id == message.identity;
 
-    final avatar = Container(
-      child: CircleAvatar(
-        backgroundColor: message.colour,
-        child: SvgPicture.network(message.image),
-      ),
-    );
-
     if (message.isBroadcast) {
       return Bubble(
           message: message.text,
           time: DateFormat.jm().format(message.date),
           delivered: true,
+          isMe: false,
           isBroadcast: message.isBroadcast);
     } else {
+      final avatar = Container(
+        child: CircleAvatar(
+          backgroundColor: message.colour,
+          child: SvgPicture.network(message.image),
+        ),
+      );
+
       return ListTile(
         dense: true,
         contentPadding: EdgeInsets.symmetric(horizontal: 5),

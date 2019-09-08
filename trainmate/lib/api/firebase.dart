@@ -3,15 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:trainmate/models/message.dart';
 
 Stream<List<Message>> getMessages(String tripId) {
-  return Firestore.instance.collection('channels/$tripId').snapshots().map((QuerySnapshot snapshot) {
-    return snapshot.documents.map((document) => Message(
-      colour: Color(int.parse(document['colour'], radix: 16)),
-      identity: document['identity'],
-      name: document['name'],
-      text: document['text'],
-      date: document['date'],
-      image: document['image'],
-      isBroadcast: document['isBroadcast'],
-    ));
+  return Firestore.instance
+      .collection('channels')
+      .document('$tripId')
+      .collection('messages')
+      .snapshots()
+      .map((QuerySnapshot snapshot) {
+
+    return snapshot.documents
+        .map((document) => Message.fromJson(document.data))
+        .toList()
+        ..sort((a,b) => a.date.compareTo(b.date));
   });
+}
+
+void sendMessage(String tripId, Message message) {
+  Firestore.instance
+      .collection('channels')
+      .document('$tripId')
+      .collection('messages')
+      .add(message.toJson());
 }

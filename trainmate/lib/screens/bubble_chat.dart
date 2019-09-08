@@ -10,17 +10,16 @@ class Bubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg = isBroadcast ? Theme.of(context).primaryColor : (isMe ? Colors.white : Colors.greenAccent.shade100);
-    final align = isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
+    final bg = isBroadcast
+        ? Theme.of(context).primaryColor
+        : (isMe ? Colors.white : Colors.greenAccent.shade100);
+    final align = isBroadcast ? CrossAxisAlignment.stretch : isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
     final icon = delivered ? Icons.done_all : Icons.done;
     final textColor = isBroadcast ? Colors.white : Colors.black38;
+    final metaTextColor = isBroadcast ? Colors.white.withOpacity(0.75) : Colors.black38;
 
     final radius = isBroadcast
-        ? BorderRadius.only(
-            topLeft: Radius.circular(10.0),
-            bottomLeft: Radius.circular(10.0),
-            bottomRight: Radius.circular(10.0),
-            topRight: Radius.circular(10.0))
+        ? BorderRadius.circular(10.0)
         : (isMe
             ? BorderRadius.only(
                 topLeft: Radius.circular(5.0),
@@ -53,30 +52,30 @@ class Bubble extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(right: 48.0),
-                child: Text(message, style: TextStyle(
-                  color: textColor,
-                  fontSize: 15.0,
-                )),
+                child: Text(message,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 15.0,
+                    )),
               ),
               Positioned(
-                bottom: 0.0,
+                top: -2.0,
                 right: 0.0,
-                child: Row(
-                  children: <Widget>[
-                    Text(time,
-                        style: TextStyle(
-                          color: Colors.black38,
-                          fontSize: 10.0,
-                        )),
-                    SizedBox(width: 3.0),
-                    Icon(
+                child: Text(time,
+                    style: TextStyle(
+                      color: metaTextColor,
+                      fontSize: 10.0,
+                    )),
+              ),
+              Positioned(
+                  top: 8.0,
+                  right: 0.0,
+                  child: Icon(
                       icon,
                       size: 12.0,
-                      color: Colors.black38,
-                    )
-                  ],
-                ),
-              )
+                      color: metaTextColor,
+                    ),
+                  )
             ],
           ),
         )

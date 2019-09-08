@@ -45,10 +45,10 @@ class ChatScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         _renderTimeline(),
-        TrainOccupancyWidget(carriageOccupancy: trip?.occupancy ?? <int>[]),
+        TrainOccupancyWidget(carriageOccupancy: trip.occupancy),
         Divider(height: 1.0),
         Expanded(
-          child: ChatStream(),
+          child: ChatStream(tripId: trip.id),
         ),
       ],
     );

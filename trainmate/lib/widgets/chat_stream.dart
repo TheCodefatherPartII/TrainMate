@@ -1,42 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:trainmate/api/firebase.dart';
 import 'package:trainmate/screens/chat_message.dart';
 import 'package:trainmate/user.dart';
-
-final fakeUsers = [
-  User('asdasd'),
-  User('kjhiofsufg'),
-];
+import 'package:trainmate/models/message.dart';
 
 class ChatStream extends StatefulWidget {
+  ChatStream({this.tripId});
+  final String tripId;
+
   @override
   _ChatStreamState createState() => _ChatStreamState();
 }
 
 class _ChatStreamState extends State<ChatStream> {
   final _chatController = TextEditingController();
-  final _messages = <Widget>[
-    ChatMessage(
-      identity: fakeUsers[0].id,
-      name: fakeUsers[0].name,
-      image: fakeUsers[0].image,
-      colour: fakeUsers[0].colour,
-      text: 'Train is running 5 mins late 😞. Sorry for inconvenience.',
-      date: DateTime.now().subtract(Duration(minutes: 5)),
-      isBroadcast: true,
-      isMe: false,
-    ),
-    ChatMessage(
-      identity: fakeUsers[1].id,
-      name: fakeUsers[1].name,
-      image: fakeUsers[1].image,
-      colour: fakeUsers[1].colour,
-      text: 'Have you tried the 7eleven? 😛',
-      date: DateTime.now().subtract(Duration(minutes: 3)),
-      isBroadcast: false,
-      isMe: false,
-    ),
-  ];
 
   void _handleSubmit() {
     final value = _chatController.text;
@@ -46,20 +24,17 @@ class _ChatStreamState extends State<ChatStream> {
 
     _chatController.clear();
 
-    ChatMessage message = ChatMessage(
-      identity: user.id,
-      name: user.name,
-      image: user.image,
-      colour: user.colour,
-      text: value,
-      date: DateTime.now(),
-      isBroadcast: false,
-      isMe: true,
+    sendMessage(
+      widget.tripId,
+      Message(
+        identity: user.id,
+        name: user.name,
+        image: user.image,
+        colour: user.colour,
+        text: value,
+        date: DateTime.now(),
+      ),
     );
-
-    setState(() {
-      _messages.add(message);
-    });
   }
 
   @override
@@ -75,10 +50,21 @@ class _ChatStreamState extends State<ChatStream> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Expanded(
-              child: ListView.builder(
-                itemCount: _messages.length,
-                itemBuilder: (ctx, index) {
-                  return _messages[index];
+              child: StreamBuilder<List<Message>>(
+                stream: getMessages(widget.tripId),
+                initialData: [],
+                builder: (ctx, snapshots) {
+
+                  return ListView.builder(
+                    itemCount: snapshots.data?.length,
+                    itemBuilder: (ctx, index) {
+                      if (snapshots.data?.isEmpty ?? true) {
+                        return null;
+                      }
+
+                      return ChatMessage(message: snapshots.data[index]);
+                    },
+                  );
                 },
               ),
             ),
