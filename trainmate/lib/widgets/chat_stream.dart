@@ -38,6 +38,18 @@ class _ChatStreamState extends State<ChatStream> {
     );
   }
 
+  void _tryScrollToBottom({Duration delay = const Duration(seconds: 1)}) {
+    if (_scrollController.hasClients) {
+      Future.delayed(delay, () {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOut,
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = User.of(context);
@@ -55,15 +67,7 @@ class _ChatStreamState extends State<ChatStream> {
                 stream: getMessages(widget.tripId),
                 initialData: [],
                 builder: (ctx, snapshots) {
-                  if (_scrollController.hasClients) {
-                    Future.delayed(Duration(seconds: 1), () {
-                      _scrollController.animateTo(
-                        _scrollController.position.maxScrollExtent,
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeOut,
-                      );
-                    });
-                  }
+                  _tryScrollToBottom();
 
                   return ListView.builder(
                     controller: _scrollController,
@@ -94,6 +98,8 @@ class _ChatStreamState extends State<ChatStream> {
                       hintText: "Start typing ...",
                     ),
                     controller: _chatController,
+                    onTap: () =>
+                        _tryScrollToBottom(delay: Duration(milliseconds: 150)),
                   ),
                 ),
                 Container(
