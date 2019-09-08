@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:trainmate/models/message.dart';
 
 Stream<List<Message>> getMessages(String tripId) {

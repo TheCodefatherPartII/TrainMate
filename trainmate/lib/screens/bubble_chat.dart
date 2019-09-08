@@ -11,12 +11,13 @@ class Bubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bg = isBroadcast
-        ? Theme.of(context).primaryColor
+        ? Color.lerp(Theme.of(context).primaryColor, Colors.white, 0.25)
         : (isMe ? Colors.white : Colors.greenAccent.shade100);
     final align = isBroadcast ? CrossAxisAlignment.stretch : isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
     final icon = delivered ? Icons.done_all : Icons.done;
-    final textColor = isBroadcast ? Colors.white : Colors.black38;
-    final metaTextColor = isBroadcast ? Colors.white.withOpacity(0.75) : Colors.black38;
+    final textColour = isBroadcast ? Colors.white : Colors.black54;
+    final metaTextColour = isBroadcast ? Colors.white.withOpacity(0.75) : Colors.black38;
+    final borderColour = isBroadcast ? Theme.of(context).primaryColor : (isMe ? Colors.black38 : Colors.greenAccent.shade700);
 
     final radius = isBroadcast
         ? BorderRadius.circular(10.0)
@@ -39,12 +40,7 @@ class Bubble extends StatelessWidget {
           margin: const EdgeInsets.all(3.0),
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: .5,
-                  spreadRadius: 1.0,
-                  color: Colors.black.withOpacity(.12))
-            ],
+            border: Border.all(color: borderColour),
             color: bg,
             borderRadius: radius,
           ),
@@ -54,7 +50,7 @@ class Bubble extends StatelessWidget {
                 padding: EdgeInsets.only(right: 48.0),
                 child: Text(message,
                     style: TextStyle(
-                      color: textColor,
+                      color: textColour,
                       fontSize: 15.0,
                     )),
               ),
@@ -63,7 +59,7 @@ class Bubble extends StatelessWidget {
                 right: 0.0,
                 child: Text(time,
                     style: TextStyle(
-                      color: metaTextColor,
+                      color: metaTextColour,
                       fontSize: 10.0,
                     )),
               ),
@@ -73,7 +69,7 @@ class Bubble extends StatelessWidget {
                   child: Icon(
                       icon,
                       size: 12.0,
-                      color: metaTextColor,
+                      color: metaTextColour,
                     ),
                   )
             ],
