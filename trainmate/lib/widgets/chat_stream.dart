@@ -23,6 +23,8 @@ class _ChatStreamState extends State<ChatStream> {
       colour: fakeUsers[0].colour,
       text: 'Does anyone know a good coffee place near Strathfield?',
       date: DateTime.now().subtract(Duration(minutes: 5)),
+      isBroadcast: true,
+      isMe: false,
     ),
     ChatMessage(
       identity: fakeUsers[1].id,
@@ -31,6 +33,8 @@ class _ChatStreamState extends State<ChatStream> {
       colour: fakeUsers[1].colour,
       text: 'Have you tried the 7eleven? 😛',
       date: DateTime.now().subtract(Duration(minutes: 3)),
+      isBroadcast: false,
+      isMe: false,
     ),
   ];
 
@@ -49,6 +53,8 @@ class _ChatStreamState extends State<ChatStream> {
       colour: user.colour,
       text: value,
       date: DateTime.now(),
+      isBroadcast: false,
+      isMe: true,
     );
 
     setState(() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trainmate/screens/bubble_chat.dart';
 import 'package:trainmate/user.dart';
 
 class ChatMessage extends StatelessWidget {
@@ -9,6 +10,8 @@ class ChatMessage extends StatelessWidget {
   final Color colour;
   final String text;
   final DateTime date;
+  final bool isBroadcast;
+  final bool isMe;
 
   // constructor to get text from textfield
   ChatMessage({
@@ -18,6 +21,8 @@ class ChatMessage extends StatelessWidget {
     this.colour,
     this.text,
     this.date,
+    this.isBroadcast,
+    this.isMe
   });
 
   @override
@@ -33,19 +38,28 @@ class ChatMessage extends StatelessWidget {
       ),
     );
 
-    return ListTile(
-      dense: true,
-      contentPadding: EdgeInsets.symmetric(horizontal: 5),
-      leading: isMyMessage ? null : avatar,
-      trailing: isMyMessage ? avatar : null,
-      title: Text(
-        isMyMessage ? '${this.name} (you)' : this.name,
-        style: textTheme.subhead.copyWith(fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        this.text,
-        style: textTheme.subhead,
-      ),
-    );
+    if (isBroadcast) {
+      return Bubble(message: this.text,
+          time: '12:00',
+          delivered: true,
+          isMe: false,
+          isBroadcast: isBroadcast);
+    } else {
+      return ListTile(
+        dense: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 5),
+        leading: isMyMessage ? null : avatar,
+        trailing: isMyMessage ? avatar : null,
+        title: Text(
+          isMyMessage ? '${this.name} (you)' : this.name,
+          style: textTheme.subhead.copyWith(fontWeight: FontWeight.bold),
+          textAlign: isMyMessage ? TextAlign.right: TextAlign.left,
+        ),
+        subtitle: Bubble(message: this.text,
+            time: '12:00',
+            delivered: true,
+            isMe: this.isMe, isBroadcast: isBroadcast),
+      );
+    }
   }
 }
