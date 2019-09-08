@@ -22,6 +22,7 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   String carriageId;
+  bool isDisabled = true;
 
   final CodeInputBuilder codeInputBuilder = CodeInputBuilders.containerized(
       emptySize: Size(45, 60),
@@ -36,6 +37,30 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final controller = TextEditingController();
 
   _chooseYourDestination() async {
+    final pattern = new RegExp(r"[a-zA-Z]\d{4}");
+
+    if (!pattern.hasMatch(carriageId)) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Invalid carriage number'),
+            content: const Text('Carriage numbers start with ONE letter followed by four numbers.\r\ne.g. N4132'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+      return;
+    }
+
     FocusScope.of(context).unfocus();
 
     Navigator.of(context).pushNamed(
@@ -76,12 +101,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       onFilled: (value) {
                         setState(() {
                           carriageId = value.trim();
+
+                          if (isDisabled && carriageId.length == 5) {
+                            setState(() {
+                              isDisabled = false;
+                            });
+                          } else if (!isDisabled && carriageId.length != 5) {
+                            setState(() {
+                              isDisabled = true;
+                            });
+                          }
                         });
                       },
                     )),
                 RaisedButton(
                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 40),
-                  onPressed: _chooseYourDestination,
+                  onPressed: isDisabled ? null : _chooseYourDestination,
                   color: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
